@@ -1,0 +1,129 @@
+[gd_scene load_steps=18 format=3 uid="uid://0l12uov6bv0e"]
+
+[ext_resource type="Script" uid="uid://bdke3v6bqgmen" path="res://scenes/objects.gd" id="1_pol4l"]
+[ext_resource type="Script" uid="uid://c1iwg5gmciah" path="res://scenes/test_object.gd" id="2_enf6l"]
+[ext_resource type="Shader" uid="uid://bnih47d8dkjft" path="res://shaders/destruction_cloud.tres" id="3_enf6l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_86p0o"]
+albedo_color = Color(0.2322, 0.54, 0.216, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uodqp"]
+albedo_color = Color(0.71, 0.71, 0.71, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_enf6l"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_86p0o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pol4l"]
+albedo_color = Color(1, 0.52, 0.52, 1)
+
+[sub_resource type="Curve" id="Curve_pv1l8"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 0.0832157), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_e88m4"]
+texture_mode = 1
+curve = SubResource("Curve_pv1l8")
+
+[sub_resource type="Curve" id="Curve_enf6l"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.165517, 0.294076), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pv1l8"]
+curve = SubResource("Curve_enf6l")
+
+[sub_resource type="Curve" id="Curve_e88m4"]
+_data = [Vector2(0.00344828, 0.734133), 0.0, 0.581585, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_g7gi1"]
+curve = SubResource("Curve_e88m4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wuck5"]
+lifetime_randomness = 0.3
+particle_flag_align_y = true
+angle_min = -87.8
+angle_max = 26.3
+radial_velocity_min = 0.00997765
+radial_velocity_max = 0.199978
+radial_velocity_curve = SubResource("CurveTexture_pv1l8")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_g7gi1")
+alpha_curve = SubResource("CurveTexture_e88m4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cafjw"]
+render_priority = 0
+shader = ExtResource("3_enf6l")
+shader_parameter/Cloud_Speed = Vector2(0.2, -0.2)
+shader_parameter/Cloud_Intensity = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_0p72i"]
+material = SubResource("ShaderMaterial_cafjw")
+radius = 0.25
+height = 0.5
+
+[node name="ShootingGallery" type="Node3D"]
+
+[node name="PlaceholderBounds" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="PlaceholderBounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.472046, -0.0326958)
+use_collision = true
+size = Vector3(1, 0.0559082, 1)
+material = SubResource("StandardMaterial3D_86p0o")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="PlaceholderBounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.52928, -0.0393677, 0)
+use_collision = true
+size = Vector3(0.0761719, 0.921265, 1)
+material = SubResource("StandardMaterial3D_uodqp")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="PlaceholderBounds"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -0.017542, 0.405389, -0.000598609)
+use_collision = true
+size = Vector3(0.0761719, 1.08789, 1)
+material = SubResource("StandardMaterial3D_uodqp")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="PlaceholderBounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.479181, -0.0393677, 0)
+use_collision = true
+size = Vector3(0.0736084, 0.921265, 1)
+material = SubResource("StandardMaterial3D_uodqp")
+
+[node name="Objects" type="Node3D" parent="."]
+script = ExtResource("1_pol4l")
+
+[node name="TestObject" type="RigidBody3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0894763, -0.362807, -0.0336761)
+mass = 0.1
+gravity_scale = 0.1
+linear_velocity = Vector3(0, 1, 0)
+angular_velocity = Vector3(0, 0.00174533, 0)
+angular_damp = 2.0
+script = ExtResource("2_enf6l")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/TestObject"]
+transform = Transform3D(0.122135, 0, 0, 0, 0.122135, 0, 0, 0, 0.122135, 0, 0, 0)
+shape = SubResource("BoxShape3D_enf6l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/TestObject/CollisionShape3D"]
+mesh = SubResource("BoxMesh_86p0o")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_pol4l")
+
+[node name="SmokeParticles" type="GPUParticles3D" parent="Objects/TestObject"]
+emitting = false
+amount = 5
+one_shot = true
+explosiveness = 0.8
+randomness = 0.15
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_wuck5")
+draw_pass_1 = SubResource("SphereMesh_0p72i")
+metadata/_edit_lock_ = true
+
+[connection signal="input_event" from="Objects/TestObject" to="Objects/TestObject" method="_on_input_event"]
