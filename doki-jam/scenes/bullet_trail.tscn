@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://2gitow74n5tp"]
+
+[ext_resource type="Script" uid="uid://dfc5n38yeqldu" path="res://scripts/bullet_trail.gd" id="1_yj8wl"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7ed8j"]
+radius = 0.05
+height = 1.1
+radial_segments = 16
+rings = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yj8wl"]
+shading_mode = 0
+
+[node name="BulletTrail" type="Node3D"]
+script = ExtResource("1_yj8wl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CapsuleMesh_7ed8j")
+surface_material_override/0 = SubResource("StandardMaterial3D_yj8wl")
+
+[node name="Target" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

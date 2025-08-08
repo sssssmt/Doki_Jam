@@ -24,7 +24,8 @@ ambient_light_energy = 0.16
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.366235, -0.661917)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.120649, 0)
+transform = Transform3D(1, 0, 0, 0, 0.998351, -0.0574072, 0, 0.0574072, 0.998351, 0, 0.659, 3.01329)
+fov = 36.9
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_o5qli")
@@ -32,4 +33,5 @@ environment = SubResource("Environment_o5qli")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
 transform = Transform3D(0.804666, -0.543166, 0.239757, 0, 0.403817, 0.91484, -0.593728, -0.73614, 0.324938, 0, 0, 0)
 light_energy = 0.838
+shadow_enabled = true
 directional_shadow_mode = 0
