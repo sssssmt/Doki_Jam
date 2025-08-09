@@ -1,17 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://d2lvnllieew3"]
+[gd_scene load_steps=11 format=3 uid="uid://cix12wuxkctqh"]
 
-[ext_resource type="Script" uid="uid://c1iwg5gmciah" path="res://scripts/target.gd" id="1_b5a2r"]
-[ext_resource type="Shader" uid="uid://bnih47d8dkjft" path="res://shaders/destruction_cloud.tres" id="2_nlbrr"]
-[ext_resource type="PackedScene" uid="uid://2gitow74n5tp" path="res://scenes/bullet_trail.tscn" id="3_nlbrr"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_enf6l"]
-size = Vector3(0.5, 0.5, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_86p0o"]
-size = Vector3(0.5, 0.5, 0.5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pol4l"]
-albedo_color = Color(1, 0.52, 0.52, 1)
+[ext_resource type="Shader" uid="uid://bnih47d8dkjft" path="res://shaders/destruction_cloud.tres" id="1_e4mxh"]
 
 [sub_resource type="Curve" id="Curve_pv1l8"]
 _limits = [-1.0, 1.0, 0.0, 1.0]
@@ -52,7 +41,7 @@ alpha_curve = SubResource("CurveTexture_e88m4")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cafjw"]
 render_priority = 0
-shader = ExtResource("2_nlbrr")
+shader = ExtResource("1_e4mxh")
 shader_parameter/Cloud_Speed = Vector2(0.3, -0.3)
 shader_parameter/Cloud_Intensity = 0.355
 
@@ -61,22 +50,7 @@ material = SubResource("ShaderMaterial_cafjw")
 radius = 1.0
 height = 2.0
 
-[node name="Target" type="RigidBody3D" groups=["targets"]]
-gravity_scale = 3.0
-can_sleep = false
-linear_velocity = Vector3(0, 1, 0)
-script = ExtResource("1_b5a2r")
-metadata/_edit_group_ = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_enf6l")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-mesh = SubResource("BoxMesh_86p0o")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_pol4l")
-
-[node name="SmokeParticles" type="GPUParticles3D" parent="."]
+[node name="SmokeParticles" type="GPUParticles3D"]
 emitting = false
 amount = 5
 lifetime = 0.75
@@ -87,13 +61,3 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_wuck5")
 draw_pass_1 = SubResource("SphereMesh_0p72i")
 metadata/_edit_lock_ = true
-
-[node name="Lifetime" type="Timer" parent="."]
-wait_time = 15.0
-one_shot = true
-
-[node name="BulletTrail" parent="." instance=ExtResource("3_nlbrr")]
-top_level = true
-
-[connection signal="input_event" from="." to="." method="_on_input_event"]
-[connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]

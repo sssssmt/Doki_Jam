@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://54rd3v61juur"]
+
+[ext_resource type="PackedScene" uid="uid://d2lvnllieew3" path="res://scenes/targets/target.tscn" id="1_2xjhi"]
+[ext_resource type="PackedScene" uid="uid://cordkhxfsau12" path="res://assets/Models3D/diamond.glb" id="2_2vr5v"]
+[ext_resource type="Material" uid="uid://cxijuidev23vm" path="res://shaders/material_diamond.tres" id="3_2vr5v"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lbt3n"]
+radius = 0.203874
+
+[sub_resource type="SphereMesh" id="SphereMesh_2vr5v"]
+
+[node name="Diamond" instance=ExtResource("1_2xjhi")]
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000452876, 0.0416869, -6.10352e-05)
+shape = SubResource("SphereShape3D_lbt3n")
+
+[node name="diamond" parent="CollisionShape3D" index="0" instance=ExtResource("2_2vr5v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000452876, -0.0882035, 6.10352e-05)
+
+[node name="Diamond" parent="CollisionShape3D/diamond" index="0"]
+surface_material_override/0 = ExtResource("3_2vr5v")
+
+[node name="Shadows" type="MeshInstance3D" parent="." index="4"]
+transform = Transform3D(0.301232, 0, 0, 0, 0.301232, 0, 0, 0, 0.301232, 0, 0.0409957, 0)
+cast_shadow = 3
+mesh = SubResource("SphereMesh_2vr5v")
+
+[editable path="CollisionShape3D/diamond"]

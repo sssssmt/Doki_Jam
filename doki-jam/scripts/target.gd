@@ -1,3 +1,4 @@
+# Target is inherited by other shapes
 class_name Target
 extends RigidBody3D
 
@@ -12,7 +13,7 @@ func _ready() -> void:
 	add_to_group("targets")
 
 
-func destroy(is_natural_death:= false):
+func destroy(was_shot:= true):
 	collision_shape.disabled = true
 	freeze = true
 	lifetime_timer.stop()

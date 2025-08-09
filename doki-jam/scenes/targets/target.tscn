@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2lvnllieew3"]
+
+[ext_resource type="Script" uid="uid://c1iwg5gmciah" path="res://scripts/target.gd" id="1_b5a2r"]
+[ext_resource type="PackedScene" uid="uid://cix12wuxkctqh" path="res://scenes/smoke_particles.tscn" id="2_ay0qt"]
+[ext_resource type="PackedScene" uid="uid://2gitow74n5tp" path="res://scenes/bullet_trail.tscn" id="3_nlbrr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ay0qt"]
+
+[node name="Target" type="RigidBody3D" groups=["targets"]]
+gravity_scale = 2.0
+can_sleep = false
+linear_velocity = Vector3(0, 1, 0)
+script = ExtResource("1_b5a2r")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ay0qt")
+
+[node name="SmokeParticles" parent="." instance=ExtResource("2_ay0qt")]
+
+[node name="Lifetime" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="BulletTrail" parent="." instance=ExtResource("3_nlbrr")]
+top_level = true
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]

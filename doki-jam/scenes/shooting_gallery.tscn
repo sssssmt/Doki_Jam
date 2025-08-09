@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://0l12uov6bv0e"]
+[gd_scene load_steps=6 format=3 uid="uid://0l12uov6bv0e"]
 
-[ext_resource type="PackedScene" uid="uid://d2lvnllieew3" path="res://scenes/target.tscn" id="1_pol4l"]
 [ext_resource type="Script" uid="uid://dpy3ca30ukscp" path="res://scripts/target_launcher.gd" id="2_enf6l"]
+[ext_resource type="PackedScene" uid="uid://lo3edku4tns2" path="res://assets/Models3D/dynamite.glb" id="3_enf6l"]
+[ext_resource type="PackedScene" uid="uid://54rd3v61juur" path="res://scenes/targets/diamond.tscn" id="3_pv1l8"]
+[ext_resource type="PackedScene" uid="uid://cau7mapc6llsc" path="res://scenes/targets/tomato.tscn" id="4_e88m4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_86p0o"]
 albedo_color = Color(0.2252, 0.4, 0.216, 1)
@@ -18,19 +20,30 @@ material = SubResource("StandardMaterial3D_86p0o")
 
 [node name="Targets" type="Node3D" parent="."]
 
-[node name="Target" parent="Targets" instance=ExtResource("1_pol4l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0894763, 0.231172, -0.0336761)
-
 [node name="TargetLauncher" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.961568, -0.15579, 1.96456)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.961568, 0.162277, 1.96456)
 script = ExtResource("2_enf6l")
+standard_force = 7.0
 metadata/_edit_group_ = true
 
 [node name="RayCast3D" type="RayCast3D" parent="TargetLauncher"]
 enabled = false
-target_position = Vector3(-0.045, 0.83, -1)
+target_position = Vector3(-0.105, 0.83, -1)
 metadata/_edit_lock_ = true
 
 [node name="Timer" type="Timer" parent="TargetLauncher"]
+wait_time = 2.0
+autostart = true
+
+[node name="dynamite" parent="." instance=ExtResource("3_enf6l")]
+transform = Transform3D(0.860591, -0.000146378, -0.509297, -0.000571928, 0.999999, -0.00125383, 0.509297, 0.00137031, 0.86059, -0.959858, -0.194092, -0.0842824)
+
+[node name="Diamond" parent="." instance=ExtResource("3_pv1l8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55561, -0.305985, 0.227586)
+freeze = true
+
+[node name="Tomato" parent="." instance=ExtResource("4_e88m4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27256, -0.31234, -0.0272961)
+freeze = true
 
 [connection signal="timeout" from="TargetLauncher/Timer" to="TargetLauncher" method="_on_timer_timeout"]

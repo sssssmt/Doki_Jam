@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cau7mapc6llsc"]
+
+[ext_resource type="PackedScene" uid="uid://d2lvnllieew3" path="res://scenes/targets/target.tscn" id="1_lwa6i"]
+[ext_resource type="PackedScene" uid="uid://2ary0m0g0gm" path="res://assets/Models3D/tomato.glb" id="2_u8ec7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_f1j8o"]
+radius = 0.174708
+
+[node name="Tomato" instance=ExtResource("1_lwa6i")]
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("SphereShape3D_f1j8o")
+
+[node name="tomato" parent="CollisionShape3D" index="0" instance=ExtResource("2_u8ec7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00815666, 0)
