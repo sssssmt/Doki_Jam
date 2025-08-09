@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://dfc5n38yeqldu" path="res://scripts/bullet_trail.gd" id="1_yj8wl"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7ed8j"]
-radius = 0.05
-height = 1.1
+resource_local_to_scene = true
+radius = 0.025
+height = 0.05
 radial_segments = 16
 rings = 2
 
@@ -14,10 +15,13 @@ shading_mode = 0
 [node name="BulletTrail" type="Node3D"]
 script = ExtResource("1_yj8wl")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("CapsuleMesh_7ed8j")
-surface_material_override/0 = SubResource("StandardMaterial3D_yj8wl")
+[node name="TargetMarker" type="Marker3D" parent="."]
 
-[node name="Target" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="Trail" type="Node3D" parent="."]
+transform = Transform3D(-0.50073, -0.607557, -0.616558, 0, 0.712287, -0.701888, 0.865603, -0.351457, -0.356664, 0, 0, 0)
+
+[node name="MeshInstance" type="MeshInstance3D" parent="Trail"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_7ed8j")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_yj8wl")

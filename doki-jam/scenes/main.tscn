@@ -21,10 +21,15 @@ ambient_light_energy = 0.16
 [node name="Main" type="Node3D"]
 
 [node name="ShootingGallery" parent="." instance=ExtResource("1_o5qli")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.366235, -0.661917)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.4866, -0.661917)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.998351, -0.0574072, 0, 0.0574072, 0.998351, 0, 0.659, 3.01329)
+transform = Transform3D(1, 0, 0, 0, 0.998351, -0.0574072, 0, 0.0574072, 0.998351, 0, 12.7794, 3.01329)
+current = true
+fov = 36.9
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 34.5326, -6.19826)
 fov = 36.9
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

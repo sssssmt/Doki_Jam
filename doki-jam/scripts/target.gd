@@ -4,6 +4,7 @@ extends RigidBody3D
 @onready var smoke_particles: GPUParticles3D = $SmokeParticles
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var lifetime_timer: Timer = $Lifetime
+@onready var bullet_trail: BulletTrail = $BulletTrail
 
 
 
@@ -28,12 +29,20 @@ func destroy(is_natural_death:= false):
 
 func ricochet(bounces_left: int = -1):
 	remove_from_group("targets")
+	bullet_trail.global_position = global_position
 	
 	await get_tree().create_timer(0.1).timeout
 	var ricochet_target: Target = get_tree().get_first_node_in_group("targets")
 	if ricochet_target:
+		# Make bullet trail
+		bullet_trail.draw_trail(ricochet_target.global_position)
+		
+		
 		ricochet_target.destroy()
 		ricochet_target.ricochet()
+	else:
+		# Hides the trail of the last Target
+		bullet_trail.hide()
 
 
 func spin():
