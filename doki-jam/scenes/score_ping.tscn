@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd1idjfn2vje8"]
+
+[ext_resource type="Script" uid="uid://27jgdiun40u7" path="res://scripts/score_ping.gd" id="1_u3ofo"]
+
+[node name="ScorePing" type="Label3D"]
+pixel_size = 0.001
+billboard = 1
+fixed_size = true
+render_priority = 2
+outline_render_priority = 1
+modulate = Color(1, 0.741333, 0.03, 1)
+outline_modulate = Color(0.53, 0.194333, 0, 1)
+text = "300"
+font_size = 30
+outline_size = 5
+script = ExtResource("1_u3ofo")

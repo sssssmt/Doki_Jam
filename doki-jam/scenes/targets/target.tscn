@@ -11,6 +11,7 @@ gravity_scale = 2.0
 can_sleep = false
 linear_velocity = Vector3(0, 1, 0)
 script = ExtResource("1_b5a2r")
+points = 50
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

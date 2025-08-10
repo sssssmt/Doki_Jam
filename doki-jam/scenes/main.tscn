@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbjgd18uffkja"]
+[gd_scene load_steps=9 format=3 uid="uid://dbjgd18uffkja"]
 
 [ext_resource type="PackedScene" uid="uid://0l12uov6bv0e" path="res://scenes/shooting_gallery.tscn" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://b2os8um20iofe" path="res://scripts/hud.gd" id="2_0wfyh"]
+[ext_resource type="AudioStream" uid="uid://cvbiwnxk7hrq" path="res://assets/Music/のんびり牧場の朝.mp3" id="3_sugp2"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_o5qli"]
 mie_color = Color(0.969111, 0.653239, 0.173624, 1)
@@ -18,19 +20,26 @@ ambient_light_source = 2
 ambient_light_color = Color(0.899258, 0.899258, 0.899258, 1)
 ambient_light_energy = 0.16
 
+[sub_resource type="Gradient" id="Gradient_0wfyh"]
+offsets = PackedFloat32Array(0.561181, 0.620253, 0.763713, 0.945148, 1)
+colors = PackedColorArray(0.666667, 0.584314, 0.380392, 1, 0.21, 0.184415, 0.1197, 1, 0.666667, 0.584314, 0.380392, 1, 0.337003, 0.287119, 0.162324, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sugp2"]
+gradient = SubResource("Gradient_0wfyh")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
 [node name="Main" type="Node3D"]
 
 [node name="ShootingGallery" parent="." instance=ExtResource("1_o5qli")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.4866, -0.661917)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.74066, -0.661917)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.998351, -0.0574072, 0, 0.0574072, 0.998351, 0, 12.7794, 3.01329)
+transform = Transform3D(1, 0, 0, 0, 0.998351, -0.0574072, 0, 0.0574072, 0.998351, 0, 3.03346, 3.01329)
 current = true
 fov = 36.9
-
-[node name="Camera3D2" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 34.5326, -6.19826)
-fov = 36.9
+size = 2.53447
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_o5qli")
@@ -40,3 +49,102 @@ transform = Transform3D(0.804666, -0.543166, 0.239757, 0, 0.403817, 0.91484, -0.
 light_energy = 0.838
 shadow_enabled = true
 directional_shadow_mode = 0
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("2_0wfyh")
+
+[node name="ScoreLabel" type="Label" parent="HUD"]
+unique_name_in_owner = true
+offset_left = 14.0
+offset_top = -1.0
+offset_right = 54.0
+offset_bottom = 95.0
+theme_override_font_sizes/font_size = 70
+text = "0"
+
+[node name="MultiplierLabel" type="Label" parent="HUD"]
+unique_name_in_owner = true
+offset_left = 19.0
+offset_top = 64.0
+offset_right = 59.0
+offset_bottom = 113.0
+theme_override_colors/font_color = Color(0.83, 0.1494, 0.750597, 1)
+theme_override_font_sizes/font_size = 35
+
+[node name="ComboLabel" type="Label" parent="HUD"]
+unique_name_in_owner = true
+offset_left = 20.0
+offset_top = 96.0
+offset_right = 97.0
+offset_bottom = 172.0
+theme_override_colors/font_color = Color(1, 0.657, 0.02, 1)
+theme_override_font_sizes/font_size = 45
+text = "0"
+
+[node name="Bullets" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1793.0
+offset_top = 934.0
+offset_right = 1833.0
+offset_bottom = 974.0
+scale = Vector2(0.644259, 0.644259)
+
+[node name="Bullet" type="TextureRect" parent="HUD/Bullets"]
+layout_mode = 0
+offset_left = -18.0
+offset_top = -80.0
+offset_right = 65.0
+offset_bottom = 3.0
+texture = SubResource("GradientTexture2D_sugp2")
+
+[node name="Bullet2" type="TextureRect" parent="HUD/Bullets"]
+layout_mode = 0
+offset_left = 61.0
+offset_top = -33.0
+offset_right = 144.0
+offset_bottom = 50.0
+texture = SubResource("GradientTexture2D_sugp2")
+
+[node name="Bullet3" type="TextureRect" parent="HUD/Bullets"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 55.0
+offset_right = 143.0
+offset_bottom = 138.0
+texture = SubResource("GradientTexture2D_sugp2")
+
+[node name="Bullet4" type="TextureRect" parent="HUD/Bullets"]
+layout_mode = 0
+offset_left = -19.0
+offset_top = 104.0
+offset_right = 64.0
+offset_bottom = 187.0
+texture = SubResource("GradientTexture2D_sugp2")
+
+[node name="Bullet5" type="TextureRect" parent="HUD/Bullets"]
+layout_mode = 0
+offset_left = -97.0
+offset_top = 55.0
+offset_right = -14.0
+offset_bottom = 138.0
+texture = SubResource("GradientTexture2D_sugp2")
+
+[node name="Bullet6" type="TextureRect" parent="HUD/Bullets"]
+layout_mode = 0
+offset_left = -97.0
+offset_top = -34.0
+offset_right = -14.0
+offset_bottom = 49.0
+texture = SubResource("GradientTexture2D_sugp2")
+
+[node name="Label" type="Label" parent="HUD/Bullets"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 81
+text = "6"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_sugp2")
+autoplay = true

@@ -1,14 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://0l12uov6bv0e"]
+[gd_scene load_steps=9 format=3 uid="uid://0l12uov6bv0e"]
 
+[ext_resource type="Script" uid="uid://tvpq5l66pbmc" path="res://scenes/shooting_gallery.gd" id="1_g7gi1"]
 [ext_resource type="Script" uid="uid://dpy3ca30ukscp" path="res://scripts/target_launcher.gd" id="2_enf6l"]
 [ext_resource type="PackedScene" uid="uid://lo3edku4tns2" path="res://assets/Models3D/dynamite.glb" id="3_enf6l"]
 [ext_resource type="PackedScene" uid="uid://54rd3v61juur" path="res://scenes/targets/diamond.tscn" id="3_pv1l8"]
 [ext_resource type="PackedScene" uid="uid://cau7mapc6llsc" path="res://scenes/targets/tomato.tscn" id="4_e88m4"]
+[ext_resource type="Script" uid="uid://c6qre87icdj8j" path="res://floor_area.gd" id="5_e88m4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_86p0o"]
 albedo_color = Color(0.2252, 0.4, 0.216, 1)
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_g7gi1"]
+
 [node name="ShootingGallery" type="Node3D"]
+script = ExtResource("1_g7gi1")
 
 [node name="PlaceholderBounds" type="Node3D" parent="."]
 
@@ -23,7 +28,7 @@ material = SubResource("StandardMaterial3D_86p0o")
 [node name="TargetLauncher" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.961568, 0.162277, 1.96456)
 script = ExtResource("2_enf6l")
-standard_force = 7.0
+standard_force = 6.0
 metadata/_edit_group_ = true
 
 [node name="RayCast3D" type="RayCast3D" parent="TargetLauncher"]
@@ -46,4 +51,13 @@ freeze = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27256, -0.31234, -0.0272961)
 freeze = true
 
+[node name="FloorArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0118771, 0)
+script = ExtResource("5_e88m4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.42147, 0)
+shape = SubResource("WorldBoundaryShape3D_g7gi1")
+
 [connection signal="timeout" from="TargetLauncher/Timer" to="TargetLauncher" method="_on_timer_timeout"]
+[connection signal="body_entered" from="FloorArea" to="FloorArea" method="_on_body_entered"]
