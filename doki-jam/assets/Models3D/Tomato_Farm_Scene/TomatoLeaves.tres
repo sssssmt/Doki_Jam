@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bm7fxvoo7d844"]
+
+[ext_resource type="Texture2D" uid="uid://csd887aj7se20" path="res://assets/Models3D/Tomato_Farm_Scene/tomato_plant_TomatoLeafTexture.png" id="1_fs5vc"]
+
+[resource]
+resource_name = "TomatoLeaves"
+transparency = 2
+alpha_scissor_threshold = 0.477987
+alpha_antialiasing_mode = 0
+cull_mode = 2
+diffuse_mode = 1
+albedo_texture = ExtResource("1_fs5vc")
+metallic = 0.3
+metallic_specular = 0.0
+roughness = 0.8

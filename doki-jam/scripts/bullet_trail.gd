@@ -30,3 +30,12 @@ func draw_trail(trail_destination:= target_marker.global_position):
 	# Change mesh height
 	var length = vector.length() + (mesh_instance.mesh.radius * 2)
 	mesh_instance.mesh.height = length
+	
+	# Fade
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_IN)
+	tween.tween_property(mesh_instance, "transparency", 1.0, 0.5)
+	
+	# Clean up node if it doesn't get removed automatically
+	await get_tree().create_timer(1.0).timeout
+	queue_free()

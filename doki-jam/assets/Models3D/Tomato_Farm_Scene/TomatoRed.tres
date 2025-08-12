@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bi73ffs288rr8"]
+
+[resource]
+resource_name = "TomatoRed"
+cull_mode = 2
+albedo_color = Color(0.55, 0, 0.00916653, 1)
+metallic = 0.11
+metallic_specular = 0.0
+roughness = 0.49

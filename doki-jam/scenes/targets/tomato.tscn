@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cau7mapc6llsc"]
+[gd_scene load_steps=5 format=3 uid="uid://cau7mapc6llsc"]
 
 [ext_resource type="PackedScene" uid="uid://d2lvnllieew3" path="res://scenes/targets/target.tscn" id="1_lwa6i"]
 [ext_resource type="PackedScene" uid="uid://2ary0m0g0gm" path="res://assets/Models3D/tomato.glb" id="2_u8ec7"]
+[ext_resource type="Material" uid="uid://ncb4ceby0t7n" path="res://shaders/outline_material.tres" id="3_f1j8o"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_f1j8o"]
 radius = 0.174708
@@ -13,3 +14,14 @@ shape = SubResource("SphereShape3D_f1j8o")
 
 [node name="tomato" parent="CollisionShape3D" index="0" instance=ExtResource("2_u8ec7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00815666, 0)
+
+[node name="Sphere" parent="CollisionShape3D/tomato" index="0"]
+material_overlay = ExtResource("3_f1j8o")
+
+[node name="Leaves" parent="CollisionShape3D/tomato" index="1"]
+material_overlay = ExtResource("3_f1j8o")
+
+[node name="BezierCurve_001" parent="CollisionShape3D/tomato" index="2"]
+material_overlay = ExtResource("3_f1j8o")
+
+[editable path="CollisionShape3D/tomato"]

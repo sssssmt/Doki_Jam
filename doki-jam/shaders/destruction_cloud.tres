@@ -1,10 +1,10 @@
 [gd_resource type="VisualShader" load_steps=27 format=3 uid="uid://bnih47d8dkjft"]
 
-[ext_resource type="Texture2D" uid="uid://dbcykp3e1n1mu" path="res://assets/T_cloudy_noise_211c.png" id="1_bxlid"]
-[ext_resource type="Texture2D" uid="uid://clu1bgb3wfuuy" path="res://assets/T_PerlinNoise_46_inv.png" id="3_42ho2"]
+[ext_resource type="Texture2D" uid="uid://dbcykp3e1n1mu" path="res://assets/noise/T_cloudy_noise_211c.png" id="1_wo75i"]
+[ext_resource type="Texture2D" uid="uid://clu1bgb3wfuuy" path="res://assets/noise/T_PerlinNoise_46_inv.png" id="2_bxlid"]
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_6lbtx"]
-size = Vector2(724, 382)
+size = Vector2(724, 862)
 title = "Cloud Dissolver"
 attached_nodes = PackedInt32Array(12, 13, 14)
 
@@ -36,7 +36,7 @@ input_name = "color"
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_httec"]
 output_port_for_preview = 0
 expanded_output_ports = [0]
-texture = ExtResource("1_bxlid")
+texture = ExtResource("1_wo75i")
 
 [sub_resource type="Gradient" id="Gradient_m5ai1"]
 interpolation_mode = 2
@@ -84,7 +84,7 @@ input_name = "normal"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_hnkg7"]
 expanded_output_ports = [0]
-texture = ExtResource("3_42ho2")
+texture = ExtResource("2_bxlid")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_7l08x"]

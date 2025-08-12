@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvxr2jhqa07id"
-path.s3tc="res://.godot/imported/T_VFX_Noise_44xainv.png-009e8a8fcb67cee80bc241b5d6280144.s3tc.ctex"
+uid="uid://dku5x6sfioymo"
+path.s3tc="res://.godot/imported/ThinTree.png-c9bd10a54a27f959ff56feaf2b0adf56.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/T_VFX_Noise_44xainv.png"
-dest_files=["res://.godot/imported/T_VFX_Noise_44xainv.png-009e8a8fcb67cee80bc241b5d6280144.s3tc.ctex"]
+source_file="res://assets/ThinTree.png"
+dest_files=["res://.godot/imported/ThinTree.png-c9bd10a54a27f959ff56feaf2b0adf56.s3tc.ctex"]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
