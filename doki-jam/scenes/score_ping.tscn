@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://27jgdiun40u7" path="res://scripts/score_ping.gd" id="1_u3ofo"]
 
 [node name="ScorePing" type="Label3D"]
-pixel_size = 0.001
+pixel_size = 0.0007
 billboard = 1
 fixed_size = true
 render_priority = 2

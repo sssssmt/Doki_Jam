@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://0l12uov6bv0e"]
+[gd_scene load_steps=15 format=3 uid="uid://0l12uov6bv0e"]
 
 [ext_resource type="Script" uid="uid://tvpq5l66pbmc" path="res://scenes/shooting_gallery.gd" id="1_g7gi1"]
 [ext_resource type="Script" uid="uid://dpy3ca30ukscp" path="res://scripts/target_launcher.gd" id="2_enf6l"]
@@ -6,22 +6,86 @@
 [ext_resource type="PackedScene" uid="uid://54rd3v61juur" path="res://scenes/targets/diamond.tscn" id="3_pv1l8"]
 [ext_resource type="PackedScene" uid="uid://cau7mapc6llsc" path="res://scenes/targets/tomato.tscn" id="4_e88m4"]
 [ext_resource type="Script" uid="uid://c6qre87icdj8j" path="res://floor_area.gd" id="5_e88m4"]
+[ext_resource type="Script" uid="uid://b2os8um20iofe" path="res://scripts/hud.gd" id="7_wuck5"]
+[ext_resource type="PackedScene" uid="uid://u1jcriyglol4" path="res://assets/Models3D/Tomato_Farm_Scene/barn.glb" id="8_0p72i"]
+[ext_resource type="PackedScene" uid="uid://bfj261pu22emr" path="res://assets/Models3D/Tomato_Farm_Scene/tomato_plant.glb" id="9_pv5gp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_86p0o"]
-albedo_color = Color(0.2252, 0.4, 0.216, 1)
+albedo_color = Color(0.24, 0.132, 0.12, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0p72i"]
+albedo_color = Color(0.27, 0.18675, 0.135, 1)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_g7gi1"]
 
+[sub_resource type="Gradient" id="Gradient_0wfyh"]
+offsets = PackedFloat32Array(0.561181, 0.620253, 0.763713, 0.945148, 1)
+colors = PackedColorArray(0.666667, 0.584314, 0.380392, 1, 0.21, 0.184415, 0.1197, 1, 0.666667, 0.584314, 0.380392, 1, 0.337003, 0.287119, 0.162324, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cafjw"]
+gradient = SubResource("Gradient_0wfyh")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
 [node name="ShootingGallery" type="Node3D"]
+process_mode = 1
 script = ExtResource("1_g7gi1")
 
+[node name="Map" type="Node3D" parent="."]
+
+[node name="barn" parent="Map" instance=ExtResource("8_0p72i")]
+transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 7.21973, -0.433533, -18.0866)
+
+[node name="Tomatoes" type="Node3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.949607, 0, 0)
+
+[node name="FirstLine" type="Node3D" parent="Map/Tomatoes"]
+
+[node name="tomato_plant" parent="Map/Tomatoes/FirstLine" instance=ExtResource("9_pv5gp")]
+transform = Transform3D(0.998153, 0.0607524, 0, -0.0607524, 0.998153, 0, 0, 0, 1, -0.200252, -0.452185, -1.14935)
+
+[node name="tomato_plant3" parent="Map/Tomatoes/FirstLine" instance=ExtResource("9_pv5gp")]
+transform = Transform3D(-0.999803, -0.0198431, -8.74228e-08, -0.0198431, 0.999803, 0, 8.74056e-08, 1.73474e-09, -1, -1.70742, -0.431043, -1.21078)
+
+[node name="tomato_plant4" parent="Map/Tomatoes/FirstLine" instance=ExtResource("9_pv5gp")]
+transform = Transform3D(0.997465, -0.0711667, 0, 0.0711667, 0.997465, 0, 0, 0, 1, -2.88032, -0.420921, -1.14935)
+
+[node name="tomato_plant2" parent="Map/Tomatoes/FirstLine" instance=ExtResource("9_pv5gp")]
+transform = Transform3D(-0.998417, 0, 0.0562396, 0, 1, 0, -0.0562396, 0, -0.998417, 1.03355, -0.467817, -1.21279)
+
+[node name="SecondLine" type="Node3D" parent="Map/Tomatoes"]
+
+[node name="tomato_plant5" parent="Map/Tomatoes/SecondLine" instance=ExtResource("9_pv5gp")]
+transform = Transform3D(0.998153, 0.0607524, 0, -0.0607524, 0.998153, 0, 0, 0, 1, -2.37421, -0.452185, -5.23761)
+
+[node name="tomato_plant6" parent="Map/Tomatoes/SecondLine" instance=ExtResource("9_pv5gp")]
+transform = Transform3D(-0.999803, -0.0198431, -8.74228e-08, -0.0198431, 0.999803, 0, 8.74056e-08, 1.73474e-09, -1, -3.88138, -0.431043, -5.29904)
+
+[node name="tomato_plant7" parent="Map/Tomatoes/SecondLine" instance=ExtResource("9_pv5gp")]
+transform = Transform3D(0.997465, -0.0711667, 0, 0.0711667, 0.997465, 0, 0, 0, 1, -5.05428, -0.420921, -5.23761)
+
+[node name="tomato_plant8" parent="Map/Tomatoes/SecondLine" instance=ExtResource("9_pv5gp")]
+transform = Transform3D(-0.998417, 0, 0.0562396, 0, 1, 0, -0.0562396, 0, -0.998417, -1.14041, -0.467817, -5.30105)
+
+[node name="tomato_plant9" parent="Map/Tomatoes/SecondLine" instance=ExtResource("9_pv5gp")]
+transform = Transform3D(0.998153, 0.0607524, 0, -0.0607524, 0.998153, 0, 0, 0, 1, 2.98192, -0.452185, -5.23761)
+
+[node name="tomato_plant10" parent="Map/Tomatoes/SecondLine" instance=ExtResource("9_pv5gp")]
+transform = Transform3D(-0.999803, -0.0198431, -8.74228e-08, -0.0198431, 0.999803, 0, 8.74056e-08, 1.73474e-09, -1, 1.47475, -0.431043, -5.29904)
+
+[node name="tomato_plant11" parent="Map/Tomatoes/SecondLine" instance=ExtResource("9_pv5gp")]
+transform = Transform3D(0.997465, -0.0711667, 0, 0.0711667, 0.997465, 0, 0, 0, 1, 0.301855, -0.420921, -5.23761)
+
 [node name="PlaceholderBounds" type="Node3D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="PlaceholderBounds"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.9936, -0.472046, -19.3261)
 use_collision = true
 size = Vector3(107.697, 0.0559082, 41.2206)
 material = SubResource("StandardMaterial3D_86p0o")
+metadata/_edit_lock_ = true
 
 [node name="Targets" type="Node3D" parent="."]
 
@@ -29,27 +93,36 @@ material = SubResource("StandardMaterial3D_86p0o")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.961568, 0.162277, 1.96456)
 script = ExtResource("2_enf6l")
 standard_force = 6.0
+horizontal_deviation = 0.45
 metadata/_edit_group_ = true
 
 [node name="RayCast3D" type="RayCast3D" parent="TargetLauncher"]
 enabled = false
-target_position = Vector3(-0.105, 0.83, -1)
+target_position = Vector3(-0.14, 0.83, -1)
 metadata/_edit_lock_ = true
 
 [node name="Timer" type="Timer" parent="TargetLauncher"]
 wait_time = 2.0
 autostart = true
 
-[node name="dynamite" parent="." instance=ExtResource("3_enf6l")]
-transform = Transform3D(0.860591, -0.000146378, -0.509297, -0.000571928, 0.999999, -0.00125383, 0.509297, 0.00137031, 0.86059, -0.959858, -0.194092, -0.0842824)
+[node name="Shelf" type="CSGBox3D" parent="."]
+transform = Transform3D(0.932191, 0, 0.361966, 0, 1, 0, -0.361966, 0, 0.932191, -1.21547, 0.178047, -0.005332)
+visible = false
+size = Vector3(1.37183, 0.104492, 0.23877)
+material = SubResource("StandardMaterial3D_0p72i")
 
-[node name="Diamond" parent="." instance=ExtResource("3_pv1l8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55561, -0.305985, 0.227586)
-freeze = true
+[node name="dynamite" parent="Shelf" instance=ExtResource("3_enf6l")]
+transform = Transform3D(0.860591, -0.000146378, -0.509297, -0.000571928, 0.999999, -0.00125383, 0.509297, 0.00137031, 0.86059, 0.472382, 0.30627, -0.0406036)
 
-[node name="Tomato" parent="." instance=ExtResource("4_e88m4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27256, -0.31234, -0.0272961)
+[node name="Diamond" parent="Shelf" instance=ExtResource("3_pv1l8")]
+transform = Transform3D(0.805723, 0.521422, -0.280945, -0.128421, 0.616844, 0.776538, 0.578203, -0.589595, 0.563967, -0.383107, 0.145552, 0.0222956)
 freeze = true
+despawns = false
+
+[node name="Tomato" parent="Shelf" instance=ExtResource("4_e88m4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0617939, 0.167244, 0.0251653)
+freeze = true
+despawns = false
 
 [node name="FloorArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0118771, 0)
@@ -58,6 +131,103 @@ script = ExtResource("5_e88m4")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FloorArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.42147, 0)
 shape = SubResource("WorldBoundaryShape3D_g7gi1")
+metadata/_edit_lock_ = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
+process_mode = 1
+script = ExtResource("7_wuck5")
+
+[node name="ScoreLabel" type="Label" parent="HUD"]
+unique_name_in_owner = true
+offset_left = 14.0
+offset_top = -1.0
+offset_right = 54.0
+offset_bottom = 95.0
+theme_override_font_sizes/font_size = 70
+text = "0"
+
+[node name="MultiplierLabel" type="Label" parent="HUD"]
+unique_name_in_owner = true
+offset_left = 19.0
+offset_top = 64.0
+offset_right = 59.0
+offset_bottom = 113.0
+theme_override_colors/font_color = Color(0.83, 0.1494, 0.750597, 1)
+theme_override_font_sizes/font_size = 35
+
+[node name="ComboLabel" type="Label" parent="HUD"]
+unique_name_in_owner = true
+offset_left = 20.0
+offset_top = 96.0
+offset_right = 97.0
+offset_bottom = 172.0
+theme_override_colors/font_color = Color(1, 0.657, 0.02, 1)
+theme_override_font_sizes/font_size = 45
+text = "0"
+
+[node name="Bullets" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1793.0
+offset_top = 934.0
+offset_right = 1833.0
+offset_bottom = 974.0
+scale = Vector2(0.644259, 0.644259)
+
+[node name="Bullet" type="TextureRect" parent="HUD/Bullets"]
+layout_mode = 0
+offset_left = -18.0
+offset_top = -80.0
+offset_right = 65.0
+offset_bottom = 3.0
+texture = SubResource("GradientTexture2D_cafjw")
+
+[node name="Bullet2" type="TextureRect" parent="HUD/Bullets"]
+layout_mode = 0
+offset_left = 61.0
+offset_top = -33.0
+offset_right = 144.0
+offset_bottom = 50.0
+texture = SubResource("GradientTexture2D_cafjw")
+
+[node name="Bullet3" type="TextureRect" parent="HUD/Bullets"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 55.0
+offset_right = 143.0
+offset_bottom = 138.0
+texture = SubResource("GradientTexture2D_cafjw")
+
+[node name="Bullet4" type="TextureRect" parent="HUD/Bullets"]
+layout_mode = 0
+offset_left = -19.0
+offset_top = 104.0
+offset_right = 64.0
+offset_bottom = 187.0
+texture = SubResource("GradientTexture2D_cafjw")
+
+[node name="Bullet5" type="TextureRect" parent="HUD/Bullets"]
+layout_mode = 0
+offset_left = -97.0
+offset_top = 55.0
+offset_right = -14.0
+offset_bottom = 138.0
+texture = SubResource("GradientTexture2D_cafjw")
+
+[node name="Bullet6" type="TextureRect" parent="HUD/Bullets"]
+layout_mode = 0
+offset_left = -97.0
+offset_top = -34.0
+offset_right = -14.0
+offset_bottom = 49.0
+texture = SubResource("GradientTexture2D_cafjw")
+
+[node name="Label" type="Label" parent="HUD/Bullets"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 81
+text = "6"
 
 [connection signal="timeout" from="TargetLauncher/Timer" to="TargetLauncher" method="_on_timer_timeout"]
 [connection signal="body_entered" from="FloorArea" to="FloorArea" method="_on_body_entered"]

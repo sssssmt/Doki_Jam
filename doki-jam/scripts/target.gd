@@ -8,6 +8,7 @@ extends RigidBody3D
 @onready var bullet_trail: BulletTrail = $BulletTrail
 
 @export var points: int = 1
+@export var despawns: bool = true
 
 
 func _ready() -> void:
@@ -28,6 +29,8 @@ func destroy(was_shot:= true):
 	
 	# Score
 	if was_shot:
+		Global.audio_sfx.destroy.play()
+		
 		Global.score += points
 		Global.combo += 1
 		var ping = preload("res://scenes/score_ping.tscn").instantiate()
@@ -48,6 +51,8 @@ func ricochet(bounces_left: int = -1):
 	await get_tree().create_timer(0.1).timeout
 	var ricochet_target: Target = get_tree().get_first_node_in_group("targets")
 	if ricochet_target:
+		Global.audio_sfx.ricochet.play(0.11)
+		
 		# Make bullet trail
 		bullet_trail.draw_trail(ricochet_target.global_position)
 		
@@ -69,8 +74,6 @@ func spin():
 
 func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
-		if Global.bullets <= 0:
-			return
 		if event.is_action_pressed("fire"):
 			destroy()
 		elif event.is_action_pressed("fire_ricochet"):
@@ -81,4 +84,5 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 
 
 func _on_lifetime_timeout() -> void:
-	destroy(false)
+	if despawns == true:
+		destroy(false)

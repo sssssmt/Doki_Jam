@@ -2,6 +2,11 @@ extends Node
 
 ## Node References
 var hud: HUD
+var audio_music: AudioStreamPlayer
+var audio_sfx: SFX
+var ui: UI
+var shooting_gallery: ShootingGallery
+
 
 # Score Variables
 @export var score: int : set = _set_score
@@ -67,12 +72,31 @@ func _physics_process(delta: float) -> void:
 	if previous_bullet_count != bullets:
 		if previous_bullet_count > bullets:
 			register_miss()
+			
+			# Game Over condition
+			if bullets <= 0:
+				game_over()
 		previous_bullet_count = bullets
 
 
 func register_hit():
 	bullets += 1
+	
+	audio_sfx.hit.play()
 
 
 func register_miss():
 	combo = 0
+	
+	audio_sfx.miss.play()
+
+
+func game_over():
+	ui.game_over_screen.display_game_over()
+	get_tree().paused = true
+
+
+func try_another():
+	bullets = 6
+	score = 0
+	get_tree().reload_current_scene()

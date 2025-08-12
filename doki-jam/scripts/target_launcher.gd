@@ -4,6 +4,8 @@ extends Node3D
 @onready var ray_cast: RayCast3D = $RayCast3D
 
 @export var standard_force:= 10.0
+@export var horizontal_deviation:= 0.5
+@export var vertical_deviation:= 0.2
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -22,8 +24,8 @@ func launch_target():
 	# Apply directional force
 	var force:= standard_force * randf_range(1.0, 1.5) # Bit of variance
 	var direction: Vector3 = ray_cast.target_position
-	direction = direction.rotated(Vector3.UP, randf_range(-1.0, 1.0) * 0.5)
-	direction = direction.rotated(Vector3.RIGHT, randf_range(-1.0, 1.0) * 0.2)
+	direction = direction.rotated(Vector3.UP, randf_range(-1.0, 1.0) * horizontal_deviation)
+	direction = direction.rotated(Vector3.RIGHT, randf_range(-1.0, 1.0) * vertical_deviation)
 	direction = direction.normalized()
 	new_target.apply_impulse(force * direction)
 	
