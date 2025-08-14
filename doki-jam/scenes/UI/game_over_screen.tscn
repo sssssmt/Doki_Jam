@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dlyf1apy4inlt"]
+[gd_scene load_steps=3 format=3 uid="uid://dlyf1apy4inlt"]
 
+[ext_resource type="Theme" uid="uid://btjt5q6wn3i0f" path="res://themes/menu_ui.tres" id="1_k3wv6"]
 [ext_resource type="Script" uid="uid://n8htng0tgxtq" path="res://scenes/UI/game_over_screen.gd" id="1_yjf6n"]
 
 [node name="GameOverScreen" type="Control"]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_k3wv6")
 script = ExtResource("1_yjf6n")
 
 [node name="Panel" type="Panel" parent="."]
@@ -34,7 +36,7 @@ theme_override_constants/separation = 10
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_type_variation = &"LabelA"
 text = "You Missed That One..."
 horizontal_alignment = 1
 
@@ -45,13 +47,6 @@ theme_override_constants/separation = 15
 
 [node name="TryAnother" type="Button" parent="CenterContainer/VBoxContainer/Buttons"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 41
 text = "Try Another!"
 
-[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer/Buttons"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 41
-text = "Quit"
-
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Buttons/TryAnother" to="." method="_on_try_another_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/Buttons/Quit" to="." method="_on_quit_pressed"]

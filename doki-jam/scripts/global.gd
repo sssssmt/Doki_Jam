@@ -2,7 +2,7 @@ extends Node
 
 ## Node References
 var hud: HUD
-var audio_music: AudioStreamPlayer
+var music: Music
 var audio_sfx: SFX
 var ui: UI
 var shooting_gallery: ShootingGallery
@@ -61,6 +61,20 @@ func _set_bullets(value):
 				child.text = str(bullets)
 #endregion
 
+func _init() -> void:
+	load_configs()
+
+
+func _ready() -> void:
+	# Don't auto-accept quit(), allows _notification() to emit quit instead
+	get_tree().auto_accept_quit = false
+
+
+func _notification(what: int) -> void:
+	# If quit request, emit quit
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		ui.quit()
+
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("debug_increase"):	# Debug
@@ -77,6 +91,51 @@ func _physics_process(delta: float) -> void:
 			if bullets <= 0:
 				game_over()
 		previous_bullet_count = bullets
+
+
+# Called when closing the game, saves settings in a .cfg
+func save_configs():
+	print("Saving configs...")
+	
+	# Create new ConfigFile object
+	var config = ConfigFile.new()
+	
+	# Store Volume settings
+	# Get values for each idx of existing Audio Buses
+	for idx in range(AudioServer.get_bus_count()):
+		var name = AudioServer.get_bus_name(idx)
+		
+		var volume = AudioServer.get_bus_volume_db(idx)
+		
+		# Write values
+		config.set_value(name, "bus_idx", idx)
+		config.set_value(name, "volume_db", AudioServer.get_bus_volume_db(idx))
+	
+	# Save to file (overwrite if exists)
+	config.save("res://Config/configs.cfg")
+
+
+# Load and set the values for each element
+func load_configs():
+	var config = ConfigFile.new()
+	
+	# Load and check for error
+	var err = config.load("res://Config/configs.cfg")
+	if err != OK:
+		return
+	
+	# Set Audio Volume for each bus
+	for idx in range(AudioServer.bus_count):
+		var name = AudioServer.get_bus_name(idx)
+		
+		# Get volume
+		var volume_db = config.get_value(name, "volume_db")
+		if volume_db == null:
+			volume_db = 0
+		
+		# Set volume for that bus
+		if idx < AudioServer.bus_count:
+			AudioServer.set_bus_volume_db(idx, volume_db)
 
 
 func register_hit():
@@ -98,5 +157,6 @@ func game_over():
 
 func try_another():
 	bullets = 6
+	combo = 0
+	multiplier = 0
 	score = 0
-	get_tree().reload_current_scene()

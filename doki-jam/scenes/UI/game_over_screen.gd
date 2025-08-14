@@ -1,10 +1,14 @@
 class_name GameOver
 extends Control
 
+signal try_another_pressed
+
 @onready var buttons: VBoxContainer = $CenterContainer/VBoxContainer/Buttons
+
 
 func _ready() -> void:
 	hide()
+
 
 func display_game_over():
 	buttons.hide()
@@ -12,10 +16,10 @@ func display_game_over():
 	await get_tree().create_timer(1.0).timeout
 	buttons.show()
 
+
 func _on_try_another_pressed() -> void:
-	get_tree().paused = false
-	Global.try_another()
+	try_another_pressed.emit()
 
 
 func _on_quit_pressed() -> void:
-	get_tree().quit()
+	Global.ui.quit()

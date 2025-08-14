@@ -1,0 +1,14 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://cqhfd2kib1y0y"]
+
+[ext_resource type="Texture2D" uid="uid://cxxnklchd7grq" path="res://assets/UI/DragoonPanel.png" id="1_idehq"]
+
+[resource]
+content_margin_left = 65.0
+content_margin_top = 65.0
+content_margin_right = 65.0
+content_margin_bottom = 65.0
+texture = ExtResource("1_idehq")
+texture_margin_left = 128.0
+texture_margin_top = 128.0
+texture_margin_right = 128.0
+texture_margin_bottom = 128.0

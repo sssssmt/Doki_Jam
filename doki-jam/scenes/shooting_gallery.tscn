@@ -1,10 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://0l12uov6bv0e"]
+[gd_scene load_steps=27 format=3 uid="uid://0l12uov6bv0e"]
 
 [ext_resource type="Script" uid="uid://tvpq5l66pbmc" path="res://scenes/shooting_gallery.gd" id="1_g7gi1"]
 [ext_resource type="Script" uid="uid://dpy3ca30ukscp" path="res://scripts/target_launcher.gd" id="2_enf6l"]
 [ext_resource type="PackedScene" uid="uid://lo3edku4tns2" path="res://assets/Models3D/dynamite.glb" id="3_enf6l"]
 [ext_resource type="PackedScene" uid="uid://54rd3v61juur" path="res://scenes/targets/diamond.tscn" id="3_pv1l8"]
 [ext_resource type="PackedScene" uid="uid://cau7mapc6llsc" path="res://scenes/targets/tomato.tscn" id="4_e88m4"]
+[ext_resource type="Material" uid="uid://ncb4ceby0t7n" path="res://shaders/outline_material.tres" id="5_aidik"]
 [ext_resource type="Script" uid="uid://c6qre87icdj8j" path="res://floor_area.gd" id="5_e88m4"]
 [ext_resource type="Script" uid="uid://b2os8um20iofe" path="res://scripts/hud.gd" id="7_wuck5"]
 [ext_resource type="Texture2D" uid="uid://dtcngpn5gvu7g" path="res://assets/cloud_1.png" id="8_0fny8"]
@@ -65,12 +66,13 @@ process_mode = 1
 script = ExtResource("1_g7gi1")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.999194, -0.0401318, 0, 0.0401318, 0.999194, 0, 0.51, 3.405)
+transform = Transform3D(1, 0, 0, 0, 0.999194, -0.0401318, 0, 0.0401318, 0.999194, 0, 1.51, 3.405)
 current = true
 fov = 29.2052
 size = 2.53447
 
 [node name="Map" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="barn" parent="Map" instance=ExtResource("8_0p72i")]
 transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 7.21973, -0.433533, -18.0866)
@@ -164,6 +166,7 @@ transform = Transform3D(0.860591, -0.000146378, -0.509297, -0.000571928, 0.99999
 
 [node name="Cylinder" parent="Map/Shelf/dynamite" index="0"]
 transform = Transform3D(1, 4.36557e-11, 0, 0, 1, 1.16415e-10, -2.98023e-08, -1.16415e-10, 1, 0, 0, -0.1)
+material_overlay = ExtResource("5_aidik")
 
 [node name="BezierCurve" parent="Map/Shelf/dynamite" index="1"]
 transform = Transform3D(1, 0, 0, 1.45519e-11, 1, 0, -1.49012e-08, 0, 1, 0, 0, 0)
@@ -301,9 +304,10 @@ region_enabled = true
 region_rect = Rect2(42.4928, 59.9507, 1877.51, 1220.05)
 
 [node name="Targets" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="TargetLauncher" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.961568, 0.162277, 1.76542)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.961568, 1.16228, 1.76542)
 script = ExtResource("2_enf6l")
 standard_force = 6.0
 horizontal_deviation = 0.45
@@ -418,6 +422,7 @@ environment = SubResource("Environment_pv5gp")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
 transform = Transform3D(0.804666, -0.543166, 0.239757, 0, 0.403817, 0.91484, -0.593728, -0.73614, 0.324938, 0, 0, 0)
+light_energy = 1.2
 shadow_enabled = true
 shadow_blur = 1.25
 directional_shadow_mode = 1

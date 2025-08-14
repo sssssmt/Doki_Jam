@@ -1,0 +1,126 @@
+[gd_scene load_steps=4 format=3 uid="uid://ha66hv703t6j"]
+
+[ext_resource type="Script" uid="uid://csfafi2xlxsu8" path="res://scenes/UI/main_menu.gd" id="1_qwnig"]
+[ext_resource type="Texture2D" uid="uid://dtpmpynfl6fxx" path="res://assets/UI/wooden_post.png" id="2_5jstl"]
+[ext_resource type="Texture2D" uid="uid://bdvjg3uayd8cl" path="res://assets/UI/wooden_sign.png" id="3_tfcbk"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qwnig")
+
+[node name="Panel" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.226707, 0.226707, 0.226707, 1)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 2
+offset_left = 423.0
+offset_top = 196.0
+offset_right = 1496.0
+offset_bottom = 883.0
+theme_override_font_sizes/font_size = 250
+text = "Doki Jam"
+
+[node name="Buttons" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WoodenPost" type="Sprite2D" parent="Buttons"]
+position = Vector2(938, 852)
+texture = ExtResource("2_5jstl")
+
+[node name="Play" type="TextureButton" parent="Buttons"]
+layout_mode = 2
+offset_left = 847.0
+offset_top = 665.0
+offset_right = 1083.0
+offset_bottom = 793.0
+rotation = -0.0344738
+pivot_offset = Vector2(122, 16)
+texture_normal = ExtResource("3_tfcbk")
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Buttons/Play"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -24.5
+offset_right = 0.5
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.615686)
+text = "Play"
+
+[node name="Settings" type="TextureButton" parent="Buttons"]
+layout_mode = 2
+offset_left = 828.0
+offset_top = 791.0
+offset_right = 1064.0
+offset_bottom = 919.0
+rotation = 0.0346911
+pivot_offset = Vector2(122, 17)
+texture_normal = ExtResource("3_tfcbk")
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Buttons/Settings"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.5
+offset_top = -24.5
+offset_right = 67.5
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.615686)
+text = "Settings"
+
+[node name="Quit" type="TextureButton" parent="Buttons"]
+layout_mode = 2
+offset_left = 801.0
+offset_top = 922.0
+offset_right = 1037.0
+offset_bottom = 1050.0
+rotation = -0.045969
+pivot_offset = Vector2(121, 16)
+texture_normal = ExtResource("3_tfcbk")
+
+[node name="Label" type="Label" parent="Buttons/Quit"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.5
+offset_top = -24.5
+offset_right = 36.5
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.615686)
+text = "Quit"
+
+[connection signal="pressed" from="Buttons/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Buttons/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Buttons/Quit" to="." method="_on_quit_pressed"]

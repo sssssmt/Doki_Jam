@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://clu1bgb3wfuuy" path="res://assets/noise/T_PerlinNoise_46_inv.png" id="2_bxlid"]
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_6lbtx"]
-size = Vector2(724, 862)
+size = Vector2(724, 382)
 title = "Cloud Dissolver"
 attached_nodes = PackedInt32Array(12, 13, 14)
 

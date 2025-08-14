@@ -1,16 +1,19 @@
-[gd_scene load_steps=19 format=3 uid="uid://dbjgd18uffkja"]
+[gd_scene load_steps=22 format=3 uid="uid://dbjgd18uffkja"]
 
 [ext_resource type="Script" uid="uid://dog5r8j3lujda" path="res://scenes/main.gd" id="1_a8y0u"]
-[ext_resource type="PackedScene" uid="uid://0l12uov6bv0e" path="res://scenes/shooting_gallery.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://dlyf1apy4inlt" path="res://scenes/UI/game_over_screen.tscn" id="2_eb6dy"]
 [ext_resource type="Script" uid="uid://balofsg3chmyw" path="res://scenes/UI/ui.tres.gd" id="2_trceg"]
 [ext_resource type="Script" uid="uid://cejl6rigkp1it" path="res://scripts/sfx.gd" id="4_jyhfs"]
 [ext_resource type="AudioStream" uid="uid://bywmk8rgfpcc5" path="res://assets/SFX/GunSFX/gunfire_and_hitsound-01.ogg" id="5_85g3d"]
 [ext_resource type="AudioStream" uid="uid://cvbiwnxk7hrq" path="res://assets/Music/のんびり牧場の朝.mp3" id="5_a8y0u"]
+[ext_resource type="PackedScene" uid="uid://c3oobu7m6m57o" path="res://scenes/UI/pause_menu.tscn" id="5_jkv2x"]
 [ext_resource type="AudioStream" uid="uid://c4ppx511l0ug8" path="res://assets/SFX/GunSFX/whizzby.ogg" id="5_tbgi4"]
 [ext_resource type="AudioStream" uid="uid://binyp0py1ubgt" path="res://assets/SFX/GunSFX/gunfire_and_hitsound-02.ogg" id="6_choun"]
+[ext_resource type="PackedScene" uid="uid://br1xb8sexb4ep" path="res://scenes/UI/settings.tscn" id="6_jbj1t"]
+[ext_resource type="PackedScene" uid="uid://ha66hv703t6j" path="res://scenes/UI/main_menu.tscn" id="7_muem4"]
 [ext_resource type="AudioStream" uid="uid://c5hes1ry1b8kb" path="res://assets/SFX/GunSFX/gunfire_and_hitsound-03.ogg" id="7_ya4ey"]
 [ext_resource type="AudioStream" uid="uid://cbpcfkf0m6mpx" path="res://assets/SFX/GunSFX/gunfire_and_hitsound-04.ogg" id="8_eb6dy"]
+[ext_resource type="Script" uid="uid://bwmtqy7c21jrf" path="res://scenes/music.gd" id="8_muem4"]
 [ext_resource type="AudioStream" uid="uid://djrdfejs5e4mi" path="res://assets/SFX/GunSFX/hitsound_1.mp3" id="9_choun"]
 [ext_resource type="AudioStream" uid="uid://cw374egr7dxig" path="res://assets/SFX/GunSFX/hitsound_2.mp3" id="10_ya4ey"]
 [ext_resource type="AudioStream" uid="uid://2by47d1xbnhn" path="res://assets/SFX/GunSFX/ricochet.mp3" id="12_eb6dy"]
@@ -46,21 +49,32 @@ stream_0/stream = ExtResource("12_eb6dy")
 process_mode = 3
 script = ExtResource("1_a8y0u")
 
-[node name="ShootingGallery" parent="." instance=ExtResource("1_o5qli")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.74066, -0.661917)
-
 [node name="UI" type="CanvasLayer" parent="."]
+process_mode = 3
 script = ExtResource("2_trceg")
 
 [node name="GameOverScreen" parent="UI" instance=ExtResource("2_eb6dy")]
+unique_name_in_owner = true
+visible = false
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("5_jkv2x")]
+unique_name_in_owner = true
+visible = false
+
+[node name="MainMenu" parent="UI" instance=ExtResource("7_muem4")]
+unique_name_in_owner = true
+
+[node name="Settings" parent="UI" instance=ExtResource("6_jbj1t")]
+unique_name_in_owner = true
+visible = false
 
 [node name="Audio" type="Node" parent="."]
 
 [node name="Music" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("5_a8y0u")
 volume_db = -2.5
-autoplay = true
 bus = &"Music"
+script = ExtResource("8_muem4")
 
 [node name="SFX" type="AudioStreamPlayer" parent="Audio"]
 max_polyphony = 12
@@ -87,3 +101,14 @@ bus = &"SFX"
 [node name="Ricochet" type="AudioStreamPlayer" parent="Audio/SFX"]
 stream = SubResource("AudioStreamRandomizer_a8y0u")
 volume_db = -5.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Audio"]
+
+[connection signal="play_button_pressed" from="UI" to="." method="_on_ui_play_button_pressed"]
+[connection signal="try_another_pressed" from="UI/GameOverScreen" to="." method="_on_game_over_screen_try_another_pressed"]
+[connection signal="quit_pressed" from="UI/PauseMenu" to="UI" method="_on_pause_menu_quit_pressed"]
+[connection signal="resume_pressed" from="UI/PauseMenu" to="UI" method="_on_pause_menu_resume_pressed"]
+[connection signal="settings_pressed" from="UI/PauseMenu" to="UI" method="_on_pause_menu_settings_pressed"]
+[connection signal="play_pressed" from="UI/MainMenu" to="UI" method="_on_main_menu_play_pressed"]
+[connection signal="quit_pressed" from="UI/MainMenu" to="UI" method="_on_main_menu_quit_pressed"]
+[connection signal="settings_pressed" from="UI/MainMenu" to="UI" method="_on_main_menu_settings_pressed"]

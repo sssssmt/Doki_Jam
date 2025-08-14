@@ -9,3 +9,4 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _ready() -> void:
 	Global.shooting_gallery = self
+	Global.try_another()
