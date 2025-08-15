@@ -1,0 +1,11 @@
+Model Information:
+* title:	Dokibird: Crowki
+* source:	https://sketchfab.com/3d-models/dokibird-crowki-369df89ce4894f8da5bb8f9386b120c3
+* author:	dokibird (https://sketchfab.com/dokibird)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Dokibird: Crowki" (https://sketchfab.com/3d-models/dokibird-crowki-369df89ce4894f8da5bb8f9386b120c3) by dokibird (https://sketchfab.com/dokibird) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

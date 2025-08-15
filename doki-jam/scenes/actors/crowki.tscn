@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0s1xawasxvb0"]
+
+[ext_resource type="PackedScene" uid="uid://d2lvnllieew3" path="res://scenes/targets/target.tscn" id="1_k7pv0"]
+[ext_resource type="PackedScene" uid="uid://4fxtpm60y8t7" path="res://assets/Models3D/dokibird_crowki_gltf/crowki.gltf" id="2_46xtn"]
+[ext_resource type="Script" uid="uid://66ot2aglsdts" path="res://scripts/crowki.gd" id="2_schu1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_46xtn"]
+height = 1.69182
+
+[node name="Crowki" instance=ExtResource("1_k7pv0")]
+script = ExtResource("2_schu1")
+points = 0
+despawns = false
+destructable = false
+can_trigger_ricochet = false
+can_ricochet = false
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_46xtn")
+
+[node name="Sketchfab_Scene" parent="CollisionShape3D" index="0" instance=ExtResource("2_46xtn")]
+transform = Transform3D(-4.29236e-07, 9.81977, 0, -9.81977, -4.29236e-07, 0, 0, 0, 9.81977, -0.429177, -9.60937e-05, 0)
+
+[node name="n_wing_R" parent="CollisionShape3D/Sketchfab_Scene/Sketchfab_model/Doki bird_fbx/Object_2/RootNode/blackbird_rig/n_anchor/n_torso" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, -7.10543e-15, 0, 7.10543e-15, 1, 0, 0, 0)
+
+[node name="n_leg_R" parent="CollisionShape3D/Sketchfab_Scene/Sketchfab_model/Doki bird_fbx/Object_2/RootNode/blackbird_rig/n_anchor" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, -7.10543e-15, 0, 7.10543e-15, 1, 0, 0, 0)
+
+[node name="Object_32" parent="CollisionShape3D/Sketchfab_Scene/Sketchfab_model/Doki bird_fbx/Object_2/RootNode/blackbird_rig/n_anchor/Armature/Object_26/Skeleton3D" index="3"]
+visible = false
+
+[editable path="CollisionShape3D/Sketchfab_Scene"]

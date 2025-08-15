@@ -9,14 +9,18 @@ extends RigidBody3D
 
 @export var points: int = 1
 @export var despawns: bool = true
+@export var destructable: bool = true
+@export var can_trigger_ricochet: bool = true
+@export var can_ricochet: bool = true
 
 
 func _ready() -> void:
-	add_to_group("targets")
+	if can_ricochet:
+		add_to_group("can_ricochet")
 
 
 func destroy(was_shot:= true):
-	remove_from_group("targets")
+	remove_from_group("can_ricochet")
 	collision_shape.disabled = true
 	freeze = true
 	lifetime_timer.stop()
@@ -45,11 +49,11 @@ func destroy(was_shot:= true):
 
 
 func ricochet(bounces_left: int = -1):
-	remove_from_group("targets")
+	remove_from_group("can_ricochet")
 	bullet_trail.global_position = global_position
 	
 	await get_tree().create_timer(0.1).timeout
-	var ricochet_target: Target = get_tree().get_first_node_in_group("targets")
+	var ricochet_target: Target = get_tree().get_first_node_in_group("can_ricochet")
 	if ricochet_target:
 		Global.audio_sfx.ricochet.play(0.11)
 		
@@ -69,18 +73,29 @@ func spin():
 	apply_torque(force)
 
 
+# Overridden by inheritance
+func on_hit():
+	pass
+
 
 ## Signals
 
 func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("fire"):
-			destroy()
+			Global.register_hit()
+			on_hit()
+			if destructable:
+				destroy()
 		elif event.is_action_pressed("fire_ricochet"):
-			destroy()
-			ricochet()
-		
-		Global.register_hit()
+			Global.register_hit()
+			on_hit()
+			if destructable:
+				destroy()
+			if can_trigger_ricochet:
+				if Global.ricochet_token:
+					ricochet()
+
 
 
 func _on_lifetime_timeout() -> void:

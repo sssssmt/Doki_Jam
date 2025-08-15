@@ -15,6 +15,7 @@ var combo: int : set = _set_combo
 
 var bullets: int = 6 : set = _set_bullets
 var previous_bullet_count: int 				# Used to check for misses
+var ricochet_token: int = 1 : set = _set_ricochet_token
 
 
 #region Variable Setter Functions
@@ -59,6 +60,10 @@ func _set_bullets(value):
 					bullet_pic.hide()
 			elif child is Label:
 				child.text = str(bullets)
+
+
+func _set_ricochet_token(value):
+	ricochet_token = clampi(value, 0, 1)
 #endregion
 
 func _init() -> void:

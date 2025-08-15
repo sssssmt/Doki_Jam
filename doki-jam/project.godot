@@ -35,7 +35,7 @@ mouse_cursor/custom_image_hotspot=Vector2(36, 36)
 
 [global_group]
 
-targets="Group containing all spawned targets"
+can_ricochet="Group containing all spawned targets"
 
 [gui]
 

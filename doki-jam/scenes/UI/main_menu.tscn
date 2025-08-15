@@ -15,70 +15,6 @@ gradient = SubResource("Gradient_tfcbk")
 fill_from = Vector2(1, 1)
 fill_to = Vector2(0, 0)
 
-[sub_resource type="Animation" id="Animation_tfcbk"]
-resource_name = "opening"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Cinematic Bars/GapControl:custom_minimum_size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.5, 1.5),
-"transitions": PackedFloat32Array(0.31864, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 650)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Buttons:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(1.36126, 1.86667),
-"transitions": PackedFloat32Array(0.435275, 1),
-"update": 0,
-"values": [1.2322, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Buttons:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(1.36667, 1.86667),
-"transitions": PackedFloat32Array(0.5, 1),
-"update": 0,
-"values": [Vector2(574, 1218), Vector2(574, 888)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Background:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.496891),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Title:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.496891),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="Animation" id="Animation_e2p27"]
 length = 0.001
 tracks/0/type = "value"
@@ -140,6 +76,21 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_bm8t2"]
+resource_name = "close_bars"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cinematic Bars/GapControl:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(3.24901, 1),
+"update": 0,
+"values": [Vector2(0, 1350), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_ngj32"]
@@ -220,8 +171,9 @@ tracks/5/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_bm8t2"]
-resource_name = "close_bars"
+[sub_resource type="Animation" id="Animation_tfcbk"]
+resource_name = "opening"
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -229,10 +181,58 @@ tracks/0/path = NodePath("Cinematic Bars/GapControl:custom_minimum_size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(3.24901, 1),
+"times": PackedFloat32Array(0.5, 1.5),
+"transitions": PackedFloat32Array(0.31864, 1),
 "update": 0,
-"values": [Vector2(0, 1350), Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(0, 650)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Buttons:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.36126, 1.86667),
+"transitions": PackedFloat32Array(0.435275, 1),
+"update": 0,
+"values": [1.2322, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Buttons:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.36667, 1.86667),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(574, 1218), Vector2(574, 888)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Background:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.496891),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Title:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.496891),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ngj32"]

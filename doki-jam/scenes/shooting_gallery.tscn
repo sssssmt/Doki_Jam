@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://0l12uov6bv0e"]
+[gd_scene load_steps=30 format=3 uid="uid://0l12uov6bv0e"]
 
 [ext_resource type="Script" uid="uid://tvpq5l66pbmc" path="res://scenes/shooting_gallery.gd" id="1_g7gi1"]
 [ext_resource type="Script" uid="uid://dpy3ca30ukscp" path="res://scripts/target_launcher.gd" id="2_enf6l"]
@@ -18,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://qiud4iwsr5to" path="res://assets/Hill.png" id="10_klwot"]
 [ext_resource type="Texture2D" uid="uid://cql38bkq0luuh" path="res://assets/TomatoHill.png" id="11_0fny8"]
 [ext_resource type="Texture2D" uid="uid://dy3m7rmx7y5uq" path="res://assets/cloud_4.png" id="11_yu0e5"]
+[ext_resource type="PackedScene" uid="uid://d0s1xawasxvb0" path="res://scenes/actors/crowki.tscn" id="17_yu0e5"]
+[ext_resource type="Texture2D" uid="uid://ngp32lt2xfio" path="res://assets/UI/token.png" id="20_wc8dk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0p72i"]
 albedo_color = Color(0.27, 0.18675, 0.135, 1)
@@ -26,6 +28,16 @@ albedo_color = Color(0.27, 0.18675, 0.135, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_86p0o"]
 albedo_color = Color(0.24, 0.132, 0.12, 1)
+
+[sub_resource type="GDScript" id="GDScript_yu0e5"]
+script/source = "extends Marker3D
+
+@export var spinning: bool = true
+
+func _process(delta: float) -> void:
+	if spinning:
+		rotate(Vector3.UP, delta * 0.4)
+"
 
 [sub_resource type="Gradient" id="Gradient_0wfyh"]
 offsets = PackedFloat32Array(0.561181, 0.620253, 0.763713, 0.945148, 1)
@@ -162,7 +174,7 @@ size = Vector3(1.37183, 0.104492, 0.23877)
 material = SubResource("StandardMaterial3D_0p72i")
 
 [node name="dynamite" parent="Map/Shelf" instance=ExtResource("3_enf6l")]
-transform = Transform3D(0.860591, -0.000146378, -0.509297, -0.000571928, 0.999999, -0.00125383, 0.509297, 0.00137031, 0.86059, -0.380833, 0.305689, -0.0127869)
+transform = Transform3D(0.381071, -0.924546, 2.22509e-08, -2.63062e-08, -3.49095e-08, -1, 0.924546, 0.38107, -3.76242e-08, -0.381, 0.171, -0.013)
 
 [node name="Cylinder" parent="Map/Shelf/dynamite" index="0"]
 transform = Transform3D(1, 4.36557e-11, 0, 0, 1, 1.16415e-10, -2.98023e-08, -1.16415e-10, 1, 0, 0, -0.1)
@@ -175,11 +187,13 @@ transform = Transform3D(1, 0, 0, 1.45519e-11, 1, 0, -1.49012e-08, 0, 1, 0, 0, 0)
 transform = Transform3D(0.805723, 0.521422, -0.280945, -0.128421, 0.616844, 0.776538, 0.578203, -0.589595, 0.563967, -0.0430691, 0.145552, -0.00128102)
 freeze = true
 despawns = false
+can_ricochet = false
 
 [node name="Tomato" parent="Map/Shelf" instance=ExtResource("4_e88m4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.401832, 0.167244, 0.00158834)
 freeze = true
 despawns = false
+can_ricochet = false
 
 [node name="FloorArea" type="Area3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0118771, 0)
@@ -303,6 +317,16 @@ texture = ExtResource("11_0fny8")
 region_enabled = true
 region_rect = Rect2(42.4928, 59.9507, 1877.51, 1220.05)
 
+[node name="Actors" type="Node3D" parent="."]
+
+[node name="SpinMarker" type="Marker3D" parent="Actors"]
+transform = Transform3D(0.999743, 0, 0.0226873, 0, 1, 0, -0.0226873, 0, 0.999743, 0, 0, 0)
+script = SubResource("GDScript_yu0e5")
+
+[node name="Crowki" parent="Actors/SpinMarker" instance=ExtResource("17_yu0e5")]
+transform = Transform3D(-2.58777e-08, -3.52282e-08, -1, -0.805928, 0.592013, 0, 0.592013, 0.805928, -4.37114e-08, 0.364, 4.81, -10.926)
+freeze = true
+
 [node name="Targets" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
@@ -332,6 +356,8 @@ offset_left = 14.0
 offset_top = -1.0
 offset_right = 54.0
 offset_bottom = 95.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 70
 text = "0"
 
@@ -351,6 +377,7 @@ offset_top = 96.0
 offset_right = 97.0
 offset_bottom = 172.0
 theme_override_colors/font_color = Color(1, 0.657, 0.02, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 45
 text = "0"
 
@@ -415,8 +442,15 @@ texture = SubResource("GradientTexture2D_cafjw")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 81
 text = "6"
+
+[node name="Token" type="Sprite2D" parent="HUD"]
+position = Vector2(1650, 968)
+scale = Vector2(0.615234, 0.615234)
+texture = ExtResource("20_wc8dk")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pv5gp")

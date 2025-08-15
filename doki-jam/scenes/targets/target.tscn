@@ -6,7 +6,7 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ay0qt"]
 
-[node name="Target" type="RigidBody3D" groups=["targets"]]
+[node name="Target" type="RigidBody3D"]
 gravity_scale = 2.0
 can_sleep = false
 linear_velocity = Vector3(0, 1, 0)

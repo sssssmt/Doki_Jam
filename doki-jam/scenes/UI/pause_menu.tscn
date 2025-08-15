@@ -62,16 +62,11 @@ text = "Quit"
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-theme_override_constants/separation = 100
 
 [node name="MainMenu" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Confirmation"]
 layout_mode = 2
 text = "Main
 Menu"
-
-[node name="Cancel" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Confirmation"]
-layout_mode = 2
-text = "Cancel"
 
 [node name="QuitGame" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Confirmation"]
 layout_mode = 2
@@ -79,9 +74,17 @@ size_flags_vertical = 4
 text = "Quit
 Game"
 
+[node name="Control" type="Control" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Confirmation"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Cancel" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Confirmation"]
+layout_mode = 2
+text = "Cancel"
+
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Options/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Options/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Options/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Confirmation/MainMenu" to="." method="_on_confirm_main_menu_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Confirmation/Cancel" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Confirmation/QuitGame" to="." method="_on_confirm_quit_game_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Confirmation/Cancel" to="." method="_on_cancel_pressed"]
