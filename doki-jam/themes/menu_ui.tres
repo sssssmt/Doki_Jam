@@ -1,6 +1,62 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://btjt5q6wn3i0f"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://btjt5q6wn3i0f"]
 
 [ext_resource type="StyleBox" uid="uid://cqhfd2kib1y0y" path="res://themes/style_box_dragoon.tres" id="1_itj8u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_itj8u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0eyv"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(1, 0.846667, 0.54, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 0.988333, 0.98, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 2
+shadow_offset = Vector2(-3, 3)
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_itj8u"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(1, 0.846667, 0.54, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 0.67451, 0.435294, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 2
+shadow_offset = Vector2(-3, 3)
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l18to"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(1, 0.846667, 0.54, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 0.988333, 0.98, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 2
+shadow_offset = Vector2(-3, 3)
+anti_aliasing = false
+anti_aliasing_size = 0.01
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o8ayv"]
 bg_color = Color(0.226708, 0.226707, 0.226708, 1)
@@ -11,6 +67,11 @@ corner_radius_bottom_left = 10
 
 [resource]
 default_font_size = 35
+Button/colors/font_color = Color(0.109804, 0.109804, 0.109804, 1)
+Button/styles/focus = SubResource("StyleBoxEmpty_itj8u")
+Button/styles/hover = SubResource("StyleBoxFlat_c0eyv")
+Button/styles/normal = SubResource("StyleBoxFlat_itj8u")
+Button/styles/pressed = SubResource("StyleBoxFlat_l18to")
 DragoonPanel/base_type = &"PanelContainer"
 DragoonPanel/styles/panel = ExtResource("1_itj8u")
 Label/colors/font_color = Color(0.11, 0.11, 0.11, 1)

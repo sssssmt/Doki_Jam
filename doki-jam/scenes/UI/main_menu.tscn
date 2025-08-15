@@ -1,8 +1,247 @@
-[gd_scene load_steps=4 format=3 uid="uid://ha66hv703t6j"]
+[gd_scene load_steps=12 format=3 uid="uid://ha66hv703t6j"]
 
 [ext_resource type="Script" uid="uid://csfafi2xlxsu8" path="res://scenes/UI/main_menu.gd" id="1_qwnig"]
 [ext_resource type="Texture2D" uid="uid://dtpmpynfl6fxx" path="res://assets/UI/wooden_post.png" id="2_5jstl"]
+[ext_resource type="Texture2D" uid="uid://b1fiocsfyr8to" path="res://assets/UI/Title.png" id="2_tfcbk"]
 [ext_resource type="Texture2D" uid="uid://bdvjg3uayd8cl" path="res://assets/UI/wooden_sign.png" id="3_tfcbk"]
+
+[sub_resource type="Gradient" id="Gradient_tfcbk"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.236842, 0.763158, 1)
+colors = PackedColorArray(0.509804, 0.219608, 0.0313726, 1, 0.683675, 0.427252, 0.160624, 1, 0.901961, 0.698039, 0.337255, 1, 0.976471, 0.866667, 0.505882, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e2p27"]
+gradient = SubResource("Gradient_tfcbk")
+fill_from = Vector2(1, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="Animation" id="Animation_tfcbk"]
+resource_name = "opening"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cinematic Bars/GapControl:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1.5),
+"transitions": PackedFloat32Array(0.31864, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 650)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Buttons:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.36126, 1.86667),
+"transitions": PackedFloat32Array(0.435275, 1),
+"update": 0,
+"values": [1.2322, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Buttons:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.36667, 1.86667),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(574, 1218), Vector2(574, 888)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Background:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.496891),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Title:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.496891),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_e2p27"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cinematic Bars/GapControl:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 650)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Buttons:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Buttons:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(574, 888)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Background:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Title:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_ngj32"]
+resource_name = "closing"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cinematic Bars/GapControl:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 1.2, 1.4, 2.43333),
+"transitions": PackedFloat32Array(2, 1, 0.329877, 1),
+"update": 0,
+"values": [Vector2(0, 650), Vector2(0, 0), Vector2(0, 0), Vector2(0, 1350)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Buttons:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.496891),
+"transitions": PackedFloat32Array(4.14106, 1),
+"update": 0,
+"values": [0.0, 1.2322]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Buttons:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.496891),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(574, 888), Vector2(574, 1111)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Title:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.26184),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Background:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.26511),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hide"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_bm8t2"]
+resource_name = "close_bars"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cinematic Bars/GapControl:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(3.24901, 1),
+"update": 0,
+"values": [Vector2(0, 1350), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ngj32"]
+_data = {
+&"RESET": SubResource("Animation_e2p27"),
+&"close_bars": SubResource("Animation_bm8t2"),
+&"closing": SubResource("Animation_ngj32"),
+&"opening": SubResource("Animation_tfcbk")
+}
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -13,40 +252,81 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qwnig")
 
-[node name="Panel" type="ColorRect" parent="."]
+[node name="Background" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.226707, 0.226707, 0.226707, 1)
 
-[node name="Title" type="Label" parent="."]
+[node name="Panel" type="ColorRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.205117, 0.205117, 0.205117, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+modulate = Color(1, 1, 1, 0.6)
+position = Vector2(960, 540.5)
+scale = Vector2(30, 16.8906)
+texture = SubResource("GradientTexture2D_e2p27")
+
+[node name="Title" type="Sprite2D" parent="."]
+position = Vector2(960, 490)
+texture = ExtResource("2_tfcbk")
+
+[node name="Cinematic Bars" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0598958
+anchor_top = -0.155556
+anchor_right = 1.0849
+anchor_bottom = 1.11574
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.143132
+scale = Vector2(1.0318, 1.0318)
+pivot_offset = Vector2(954, 534)
+theme_override_constants/separation = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="CinematicBar" type="ColorRect" parent="Cinematic Bars"]
 layout_mode = 2
-offset_left = 423.0
-offset_top = 196.0
-offset_right = 1496.0
-offset_bottom = 883.0
-theme_override_font_sizes/font_size = 250
-text = "Doki Jam"
+size_flags_vertical = 3
+color = Color(0.051971, 0.051971, 0.051971, 1)
+
+[node name="GapControl" type="Control" parent="Cinematic Bars"]
+custom_minimum_size = Vector2(0, 650)
+layout_mode = 2
+
+[node name="CinematicBar2" type="ColorRect" parent="Cinematic Bars"]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.051971, 0.051971, 0.051971, 1)
 
 [node name="Buttons" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 574.0
+offset_top = 1111.0
+offset_right = 614.0
+offset_bottom = 1151.0
+pivot_offset = Vector2(44, 190)
 
 [node name="WoodenPost" type="Sprite2D" parent="Buttons"]
-position = Vector2(938, 852)
+position = Vector2(74.6074, -36.5)
 texture = ExtResource("2_5jstl")
 
 [node name="Play" type="TextureButton" parent="Buttons"]
 layout_mode = 2
-offset_left = 847.0
-offset_top = 665.0
-offset_right = 1083.0
-offset_bottom = 793.0
+offset_left = -16.3926
+offset_top = -223.5
+offset_right = 219.607
+offset_bottom = -95.5
 rotation = -0.0344738
 pivot_offset = Vector2(122, 16)
 texture_normal = ExtResource("3_tfcbk")
@@ -70,10 +350,10 @@ text = "Play"
 
 [node name="Settings" type="TextureButton" parent="Buttons"]
 layout_mode = 2
-offset_left = 828.0
-offset_top = 791.0
-offset_right = 1064.0
-offset_bottom = 919.0
+offset_left = -35.3926
+offset_top = -97.5
+offset_right = 200.607
+offset_bottom = 30.5
 rotation = 0.0346911
 pivot_offset = Vector2(122, 17)
 texture_normal = ExtResource("3_tfcbk")
@@ -97,13 +377,14 @@ text = "Settings"
 
 [node name="Quit" type="TextureButton" parent="Buttons"]
 layout_mode = 2
-offset_left = 801.0
-offset_top = 922.0
-offset_right = 1037.0
-offset_bottom = 1050.0
+offset_left = -62.3926
+offset_top = 33.5
+offset_right = 173.607
+offset_bottom = 161.5
 rotation = -0.045969
 pivot_offset = Vector2(121, 16)
 texture_normal = ExtResource("3_tfcbk")
+metadata/_edit_group_ = true
 
 [node name="Label" type="Label" parent="Buttons/Quit"]
 layout_mode = 1
@@ -120,6 +401,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.615686)
 text = "Quit"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ngj32")
+}
+autoplay = "opening"
 
 [connection signal="pressed" from="Buttons/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Buttons/Settings" to="." method="_on_settings_pressed"]

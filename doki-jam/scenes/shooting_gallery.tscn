@@ -323,6 +323,7 @@ autostart = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
 process_mode = 1
+layer = 0
 script = ExtResource("7_wuck5")
 
 [node name="ScoreLabel" type="Label" parent="HUD"]

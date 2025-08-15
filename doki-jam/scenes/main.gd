@@ -13,13 +13,15 @@ func load_world():
 	
 	var gallery = preload("res://scenes/shooting_gallery.tscn").instantiate()
 	add_child(gallery)
+	
+	%GameOverScreen.hide()
+
 
 
 
 func _on_ui_play_button_pressed() -> void:
 	load_world()
-	Global.music.fade_to(Global.music.game_music)
-	Global.ui.hide_menus()
+	Global.music.fade_to(Global.music.game_music, 3.0)
 
 
 func _on_game_over_screen_try_another_pressed() -> void:

@@ -6,7 +6,7 @@ signal play_button_pressed
 @onready var game_over_screen: GameOver = %GameOverScreen
 @onready var pause_menu: Control = %PauseMenu
 @onready var settings: Control = %Settings
-@onready var main_menu: Control = %MainMenu
+@onready var main_menu: MainMenu = %MainMenu
 
 
 
@@ -35,6 +35,20 @@ func hide_menus():
 
 func game_over():
 	game_over_screen.display_game_over()
+
+
+func back_to_main_menu():
+	Global.music.fade_to(Global.music.menu_music, 2.0)
+	
+	hide_menus()
+	main_menu.show()
+	main_menu.anim_player.play("close_bars")
+	await main_menu.anim_player.animation_finished
+	main_menu.anim_player.play("opening")
+	
+	if Global.shooting_gallery:
+		Global.shooting_gallery.queue_free()
+	
 
 
 func pause():
@@ -78,7 +92,7 @@ func _on_main_menu_settings_pressed() -> void:
 
 func _on_main_menu_play_pressed() -> void:
 	play_button_pressed.emit()
-	hide_menus()
+	#hide_menus()
 
 
 func _on_main_menu_quit_pressed() -> void:
