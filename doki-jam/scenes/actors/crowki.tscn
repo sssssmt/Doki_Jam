@@ -1,11 +1,42 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0s1xawasxvb0"]
+[gd_scene load_steps=11 format=3 uid="uid://d0s1xawasxvb0"]
 
 [ext_resource type="PackedScene" uid="uid://d2lvnllieew3" path="res://scenes/targets/target.tscn" id="1_k7pv0"]
 [ext_resource type="PackedScene" uid="uid://4fxtpm60y8t7" path="res://assets/Models3D/dokibird_crowki_gltf/crowki.gltf" id="2_46xtn"]
 [ext_resource type="Script" uid="uid://66ot2aglsdts" path="res://scripts/crowki.gd" id="2_schu1"]
+[ext_resource type="Texture2D" uid="uid://xhgllxgnm5sa" path="res://assets/Particles/sparkle.png" id="4_2qfl6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_46xtn"]
 height = 1.69182
+
+[sub_resource type="Curve" id="Curve_2qfl6"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0476191, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.6545, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_6waob"]
+curve = SubResource("Curve_2qfl6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6waob"]
+emission_shape_offset = Vector3(0, -0.26, 0)
+emission_shape_scale = Vector3(0.5, 0.5, 0.5)
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, -1, 0)
+damping_max = 1.0
+scale_min = 0.2
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_6waob")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xx3ck"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("4_2qfl6")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_58a2d"]
+material = SubResource("StandardMaterial3D_xx3ck")
+size = Vector2(1, 1)
+orientation = 2
 
 [node name="Crowki" instance=ExtResource("1_k7pv0")]
 script = ExtResource("2_schu1")
@@ -30,5 +61,23 @@ transform = Transform3D(1, 0, 0, 0, 1, -7.10543e-15, 0, 7.10543e-15, 1, 0, 0, 0)
 
 [node name="Object_32" parent="CollisionShape3D/Sketchfab_Scene/Sketchfab_model/Doki bird_fbx/Object_2/RootNode/blackbird_rig/n_anchor/Armature/Object_26/Skeleton3D" index="3"]
 visible = false
+
+[node name="Lifetime" parent="." index="2"]
+autostart = false
+
+[node name="ShinyParticles" type="GPUParticles3D" parent="." index="4"]
+emitting = false
+amount = 15
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_6waob")
+draw_pass_1 = SubResource("PlaneMesh_58a2d")
+
+[node name="Cooldown" type="Timer" parent="." index="5"]
+wait_time = 20.0
+one_shot = true
+
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
 
 [editable path="CollisionShape3D/Sketchfab_Scene"]

@@ -6,6 +6,7 @@ extends CanvasLayer
 @onready var combo_label: Label = %ComboLabel
 @onready var multiplier_label: Label = %MultiplierLabel
 @onready var bullets: Control = $Bullets
+@onready var token: Sprite2D = $Token
 
 
 

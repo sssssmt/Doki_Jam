@@ -64,6 +64,13 @@ func _set_bullets(value):
 
 func _set_ricochet_token(value):
 	ricochet_token = clampi(value, 0, 1)
+	
+	if hud:
+		var hud_token = hud.token
+		if ricochet_token == 0:
+			hud_token.hide()
+		else:
+			hud_token.show()
 #endregion
 
 func _init() -> void:
@@ -162,6 +169,7 @@ func game_over():
 
 func try_another():
 	bullets = 6
+	ricochet_token = 1
 	combo = 0
 	multiplier = 0
 	score = 0

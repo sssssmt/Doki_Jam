@@ -75,7 +75,7 @@ func spin():
 
 # Overridden by inheritance
 func on_hit():
-	pass
+	Global.register_hit()
 
 
 ## Signals
@@ -83,17 +83,16 @@ func on_hit():
 func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("fire"):
-			Global.register_hit()
 			on_hit()
 			if destructable:
 				destroy()
 		elif event.is_action_pressed("fire_ricochet"):
-			Global.register_hit()
 			on_hit()
 			if destructable:
 				destroy()
 			if can_trigger_ricochet:
 				if Global.ricochet_token:
+					Global.ricochet_token -= 1
 					ricochet()
 
 
