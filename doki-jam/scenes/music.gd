@@ -13,7 +13,6 @@ func _init() -> void:
 func fade_to(song: String, time: float = 1.0):
 	# Fade Out
 	var tween_out = create_tween()
-	var previous_volume_linear = volume_linear
 	tween_out.set_ease(Tween.EASE_IN)
 	tween_out.tween_property(self, "volume_linear", 0.0, time/2)
 	await tween_out.finished
@@ -23,4 +22,4 @@ func fade_to(song: String, time: float = 1.0):
 	
 	# Fade In
 	var tween_in = create_tween()
-	tween_in.tween_property(self, "volume_linear", previous_volume_linear, time/2)
+	tween_in.tween_property(self, "volume_linear", db_to_linear(-2.5), time/2)

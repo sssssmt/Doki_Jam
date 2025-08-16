@@ -2,6 +2,8 @@ extends Target
 
 @onready var shiny_particles: GPUParticles3D = $ShinyParticles
 @onready var cooldown: Timer = $Cooldown
+@onready var voice_player: AudioStreamPlayer = $VoicePlayer
+
 
 var can_be_shot: bool = true
 
@@ -12,6 +14,8 @@ func on_hit():
 			Global.bullets += 1
 		else:
 			Global.ricochet_token += 1
+		
+		voice_player.play()
 		
 		shiny_particles.restart()
 		deactivate()

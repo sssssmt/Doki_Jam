@@ -1,6 +1,22 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://btjt5q6wn3i0f"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://btjt5q6wn3i0f"]
 
 [ext_resource type="StyleBox" uid="uid://cqhfd2kib1y0y" path="res://themes/style_box_dragoon.tres" id="1_itj8u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xsv7d"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(1, 0.787333, 0.56, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 0.67451, 0.435294, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+anti_aliasing = false
+anti_aliasing_size = 0.01
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_itj8u"]
 
@@ -58,6 +74,21 @@ shadow_offset = Vector2(-3, 3)
 anti_aliasing = false
 anti_aliasing_size = 0.01
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i1w55"]
+bg_color = Color(1, 0.847059, 0.541176, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 0.67451, 0.435294, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.294118)
+shadow_size = 5
+shadow_offset = Vector2(-3, 3)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o8ayv"]
 bg_color = Color(0.226708, 0.226707, 0.226708, 1)
 corner_radius_top_left = 10
@@ -68,6 +99,8 @@ corner_radius_bottom_left = 10
 [resource]
 default_font_size = 35
 Button/colors/font_color = Color(0.109804, 0.109804, 0.109804, 1)
+Button/colors/font_disabled_color = Color(0.11, 0.11, 0.11, 0.2)
+Button/styles/disabled = SubResource("StyleBoxFlat_xsv7d")
 Button/styles/focus = SubResource("StyleBoxEmpty_itj8u")
 Button/styles/hover = SubResource("StyleBoxFlat_c0eyv")
 Button/styles/normal = SubResource("StyleBoxFlat_itj8u")
@@ -77,5 +110,6 @@ DragoonPanel/styles/panel = ExtResource("1_itj8u")
 Label/colors/font_color = Color(0.11, 0.11, 0.11, 1)
 LabelA/base_type = &"Label"
 LabelA/font_sizes/font_size = 46
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_i1w55")
 PanelContainerA/base_type = &"PanelContainer"
 PanelContainerA/styles/panel = SubResource("StyleBoxFlat_o8ayv")

@@ -7,10 +7,11 @@ var audio_sfx: SFX
 var ui: UI
 var shooting_gallery: ShootingGallery
 
+var show_tutorial: bool = true
 
 # Score Variables
-@export var score: int : set = _set_score
-@export var multiplier: float = 1.0 : set = _set_multiplier
+var score: int : set = _set_score
+var multiplier: float = 1.0 : set = _set_multiplier
 var combo: int : set = _set_combo
 
 var bullets: int = 6 : set = _set_bullets
@@ -85,7 +86,10 @@ func _ready() -> void:
 func _notification(what: int) -> void:
 	# If quit request, emit quit
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		ui.quit()
+		if ui:
+			ui.quit()
+		else:
+			get_tree().quit()
 
 
 func _physics_process(delta: float) -> void:

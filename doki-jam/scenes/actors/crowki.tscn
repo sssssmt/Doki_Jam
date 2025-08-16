@@ -1,9 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0s1xawasxvb0"]
+[gd_scene load_steps=17 format=3 uid="uid://d0s1xawasxvb0"]
 
 [ext_resource type="PackedScene" uid="uid://d2lvnllieew3" path="res://scenes/targets/target.tscn" id="1_k7pv0"]
 [ext_resource type="PackedScene" uid="uid://4fxtpm60y8t7" path="res://assets/Models3D/dokibird_crowki_gltf/crowki.gltf" id="2_46xtn"]
 [ext_resource type="Script" uid="uid://66ot2aglsdts" path="res://scripts/crowki.gd" id="2_schu1"]
 [ext_resource type="Texture2D" uid="uid://xhgllxgnm5sa" path="res://assets/Particles/sparkle.png" id="4_2qfl6"]
+[ext_resource type="AudioStream" uid="uid://ctf8dhba3xae2" path="res://assets/Voice/Crowki/im_a_bird_laugh.ogg" id="5_6waob"]
+[ext_resource type="AudioStream" uid="uid://bx7ea71iqirnb" path="res://assets/Voice/Crowki/caw-01.ogg" id="6_g1qri"]
+[ext_resource type="AudioStream" uid="uid://bkxsup4moi8i8" path="res://assets/Voice/Crowki/caw-02.ogg" id="7_ijlti"]
+[ext_resource type="AudioStream" uid="uid://cv5x0p0pnpbq5" path="res://assets/Voice/Crowki/caw-03.ogg" id="8_q8ey3"]
+[ext_resource type="AudioStream" uid="uid://ryaowvsadisd" path="res://assets/Voice/Crowki/caw-04.ogg" id="9_y7uog"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_46xtn"]
 height = 1.69182
@@ -37,6 +42,18 @@ billboard_keep_scale = true
 material = SubResource("StandardMaterial3D_xx3ck")
 size = Vector2(1, 1)
 orientation = 2
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xx3ck"]
+streams_count = 5
+stream_0/stream = ExtResource("5_6waob")
+stream_1/stream = ExtResource("6_g1qri")
+stream_1/weight = 1.5
+stream_2/stream = ExtResource("7_ijlti")
+stream_2/weight = 0.5
+stream_3/stream = ExtResource("8_q8ey3")
+stream_3/weight = 0.5
+stream_4/stream = ExtResource("9_y7uog")
+stream_4/weight = 0.5
 
 [node name="Crowki" instance=ExtResource("1_k7pv0")]
 script = ExtResource("2_schu1")
@@ -77,6 +94,11 @@ draw_pass_1 = SubResource("PlaneMesh_58a2d")
 [node name="Cooldown" type="Timer" parent="." index="5"]
 wait_time = 20.0
 one_shot = true
+
+[node name="VoicePlayer" type="AudioStreamPlayer" parent="." index="6"]
+process_mode = 3
+stream = SubResource("AudioStreamRandomizer_xx3ck")
+bus = &"Voice"
 
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
 

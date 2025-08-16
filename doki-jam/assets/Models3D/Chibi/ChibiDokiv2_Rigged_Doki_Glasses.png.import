@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://ds4528imji65p"
+path.s3tc="res://.godot/imported/ChibiDokiv2_Rigged_Doki_Glasses.png-fda8439a9aa84bc3548fbb44e75af28c.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "721d6e4d528bf615a9be08f0027f8fa0"
+}
+
+[deps]
+
+source_file="res://assets/Models3D/Chibi/ChibiDokiv2_Rigged_Doki_Glasses.png"
+dest_files=["res://.godot/imported/ChibiDokiv2_Rigged_Doki_Glasses.png-fda8439a9aa84bc3548fbb44e75af28c.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

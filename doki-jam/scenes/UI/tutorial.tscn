@@ -1,0 +1,679 @@
+[gd_scene load_steps=16 format=3 uid="uid://cyerut47b3bjs"]
+
+[ext_resource type="Script" uid="uid://c2lpkh7ye0dhb" path="res://scenes/UI/tutorial.gd" id="1_y1uxg"]
+[ext_resource type="Texture2D" uid="uid://ngp32lt2xfio" path="res://assets/UI/token.png" id="2_8lsiq"]
+[ext_resource type="Texture2D" uid="uid://p2npv104ydby" path="res://assets/crowkie_pic.png" id="2_blqdf"]
+[ext_resource type="PackedScene" uid="uid://c10nt12vyo86d" path="res://assets/Models3D/Dragoons/egg_dragoon.glb" id="4_jvrx0"]
+[ext_resource type="PackedScene" uid="uid://goujv7x5620p" path="res://assets/Models3D/Dragoons/regular_dragoon.glb" id="5_vdm5y"]
+[ext_resource type="PackedScene" uid="uid://dtiak3aau2uog" path="res://assets/Models3D/Dragoons/long_dragoon.glb" id="6_nba6y"]
+[ext_resource type="PackedScene" uid="uid://csrf7bs2dcgv5" path="res://assets/Models3D/Dragoons/chonky_dragoon.glb" id="7_gmrf6"]
+[ext_resource type="PackedScene" uid="uid://duikri24sq2q4" path="res://scenes/actors/chibi_doki.tscn" id="8_vdm5y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tutie"]
+bg_color = Color(0.529412, 0.447059, 0.286275, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="GDScript" id="GDScript_vdm5y"]
+script/source = "extends ColorRect
+
+@onready var camera: Camera3D = $SubViewportContainer/SubViewport/Node3D/Camera3D
+@onready var name_label: Label = $PanelContainer/Name
+@onready var description_label: Label = $PanelContainer2/Description
+
+enum Dragoon {EGG, REGULAR, LONG, CHONKY}
+var current_dragoon: Dragoon
+
+
+var character = {
+	Dragoon.EGG: {
+		\"name\": \"Eggoon\",
+		\"camera_x\": -8.98,
+		\"description\": \"Lives a sheltered life. I hope that's it's tail...\",
+	},
+	Dragoon.REGULAR: {
+		\"name\": \"John Dragoon\",
+		\"camera_x\": -2.86,
+		\"description\": \"Practically perfect in every way. Just another way to say boring.\",
+	},
+	Dragoon.LONG: {
+		\"name\": \"xxX420Long_Goon69xXxx\",
+		\"camera_x\": 2.83,
+		\"description\": \"Has a higher vantage point in game, but Doki always makes then hunch over.\",
+	},
+	Dragoon.CHONKY: {
+		\"name\": \"Chonky\",
+		\"camera_x\": 9.11,
+		\"description\": \"Canonically has a incredible 401K.\",
+	},
+}
+
+
+func _ready() -> void:
+	select_dragoon(Dragoon.REGULAR)
+
+
+func select_dragoon(dragoon: Dragoon):
+	dragoon = clampi(dragoon, 0, 3)
+	current_dragoon = dragoon
+	
+	name_label.text = character[dragoon].name
+	description_label.text = character[dragoon].description
+	
+	var tween = create_tween()
+	var camera_x = character[dragoon].camera_x
+	tween.tween_property(camera, \"position:x\", camera_x, 1.0)
+	
+
+
+func _on_left_character_pressed() -> void:
+	select_dragoon(current_dragoon - 1)
+
+
+func _on_right_character_pressed() -> void:
+	select_dragoon(current_dragoon + 1)
+"
+
+[sub_resource type="GDScript" id="GDScript_jvrx0"]
+script/source = "extends Node3D
+
+@export var speed = 0.3
+
+func _process(delta: float) -> void:
+	for dragoon: Node3D in get_children():
+		dragoon.rotate(Vector3.UP, delta * speed)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jvrx0"]
+uv1_scale = Vector3(3.283, 1.74, 3.283)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_vdm5y"]
+material = SubResource("StandardMaterial3D_jvrx0")
+
+[sub_resource type="Environment" id="Environment_nba6y"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 0.847059, 0.541176, 1)
+ambient_light_energy = 0.94
+ssao_enabled = true
+ssao_radius = 5.12
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.3227
+
+[sub_resource type="Environment" id="Environment_vdm5y"]
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
+background_energy_multiplier = 0.75
+
+[node name="Tutorial" type="CanvasLayer"]
+process_mode = 3
+layer = 0
+script = ExtResource("1_y1uxg")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08, 0.08, 0.08, 0.690196)
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0401042
+anchor_top = 0.0407407
+anchor_right = 0.959896
+anchor_bottom = 0.959259
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Content" type="Control" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ClipPanel" type="Panel" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content"]
+clip_children = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tutie")
+
+[node name="Slides" type="Control" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CharacterSelect" type="ColorRect" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.529412, 0.447059, 0.286275, 1)
+script = SubResource("GDScript_vdm5y")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect/SubViewportContainer"]
+own_world_3d = true
+handle_input_locally = false
+msaa_3d = 2
+gui_disable_input = true
+size = Vector2i(1707, 872)
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect/SubViewportContainer/SubViewport"]
+
+[node name="Camera3D" type="Camera3D" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect/SubViewportContainer/SubViewport/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.91369, 1.37861, 4.13174)
+fov = 50.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect/SubViewportContainer/SubViewport/Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -2.8654, 4.53063, 0)
+spot_range = 4.70795
+spot_attenuation = -2.09
+spot_angle = 15.5546
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect/SubViewportContainer/SubViewport/Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -8.96561, 4.53063, 0)
+spot_range = 4.70795
+spot_attenuation = -2.09
+spot_angle = 15.5546
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect/SubViewportContainer/SubViewport/Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2.78783, 4.53063, 0)
+spot_range = 4.70795
+spot_attenuation = -2.09
+spot_angle = 15.5546
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect/SubViewportContainer/SubViewport/Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 9.0838, 4.53063, 0)
+spot_range = 4.70795
+spot_attenuation = -2.09
+spot_angle = 15.5546
+
+[node name="Dragoons" type="Node3D" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect/SubViewportContainer/SubViewport/Node3D"]
+script = SubResource("GDScript_jvrx0")
+speed = 1.4
+
+[node name="egg_dragoon" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect/SubViewportContainer/SubViewport/Node3D/Dragoons" instance=ExtResource("4_jvrx0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.98215, 0, 0)
+
+[node name="regular_dragoon" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect/SubViewportContainer/SubViewport/Node3D/Dragoons" instance=ExtResource("5_vdm5y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8654, 0, 0)
+
+[node name="long_dragoon" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect/SubViewportContainer/SubViewport/Node3D/Dragoons" instance=ExtResource("6_nba6y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.83615, 0, -0.000419617)
+
+[node name="chonky_dragoon" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect/SubViewportContainer/SubViewport/Node3D/Dragoons" instance=ExtResource("7_gmrf6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.11614, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect/SubViewportContainer/SubViewport/Node3D"]
+transform = Transform3D(40, 0, 0, 0, 1, 0, 0, 0, 10, 0, -0.5, -1.3411)
+mesh = SubResource("BoxMesh_vdm5y")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect/SubViewportContainer/SubViewport/Node3D"]
+transform = Transform3D(40, 0, 0, 0, 10, 0, 0, 0, 1, 0, 3.90154, -5.491)
+mesh = SubResource("BoxMesh_vdm5y")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect/SubViewportContainer/SubViewport"]
+environment = SubResource("Environment_nba6y")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect/SubViewportContainer/SubViewport/WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 0.725891, 0.68781, 0, -0.68781, 0.725891, 0, 0, 0)
+visible = false
+
+[node name="LeftCharacter" type="Button" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = -131.0
+offset_right = 148.0
+offset_bottom = 131.0
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.61, 0.391823, 0.2562, 0.290196)
+theme_override_colors/font_color = Color(1, 0.930667, 0.87, 1)
+theme_override_constants/outline_size = 30
+theme_override_font_sizes/font_size = 126
+text = "<"
+flat = true
+
+[node name="RightCharacter" type="Button" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -146.0
+offset_top = -131.0
+offset_right = -30.0
+offset_bottom = 131.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.61, 0.391823, 0.2562, 0.290196)
+theme_override_colors/font_color = Color(1, 0.930667, 0.87, 1)
+theme_override_constants/outline_size = 30
+theme_override_font_sizes/font_size = 126
+text = ">"
+flat = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect"]
+layout_mode = 1
+offset_left = 43.0
+offset_top = 34.0
+offset_right = 586.0
+offset_bottom = 103.0
+metadata/_edit_group_ = true
+
+[node name="Name" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect/PanelContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.45098, 0.337255, 0.137255, 1)
+theme_override_constants/outline_size = 15
+text = "Dragoon"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0252052
+anchor_top = 0.145688
+anchor_right = 0.344666
+anchor_bottom = 0.226107
+metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Description" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect/PanelContainer2"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.45098, 0.337255, 0.137255, 1)
+theme_override_constants/outline_size = 15
+text = "Description"
+autowrap_mode = 2
+
+[node name="6" type="ColorRect" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.529412, 0.447059, 0.286275, 1)
+
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/6"]
+custom_minimum_size = Vector2(1000, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -200.0
+offset_right = 500.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.45098, 0.337255, 0.137255, 1)
+theme_override_constants/outline_size = 15
+text = "Okay let's get you out there now. But first choose which Dragoon you are.
+
+Choose carefully cuz you can't ever redo this.
+Make sure not to pick the ugliest Dragoon..."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/6"]
+modulate = Color(1, 1, 1, 0.239216)
+custom_minimum_size = Vector2(1000, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 250.0
+offset_top = -93.0
+offset_right = 1250.0
+offset_bottom = 307.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.45098, 0.337255, 0.137255, 1)
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 21
+text = "you know the one"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="5" type="ColorRect" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.529412, 0.447059, 0.286275, 1)
+
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/5"]
+custom_minimum_size = Vector2(1000, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -200.0
+offset_right = 500.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.45098, 0.337255, 0.137255, 1)
+theme_override_constants/outline_size = 15
+text = "OH MY GOD, Dragoon, it's everyone's favorite Dokiverse character, Crowki. She carries tokens, so shoot her to get your token back.
+If you already have one, she'll drop an extra bullet instead.
+
+Oh, does Crowki feel pain? Haha, that's for me to know and Crowki to find out."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="CrowkiePic" type="Sprite2D" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/5"]
+position = Vector2(801.5, 129.5)
+scale = Vector2(2.44924, 0.570388)
+texture = ExtResource("2_blqdf")
+flip_h = true
+
+[node name="4" type="ColorRect" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.529412, 0.447059, 0.286275, 1)
+
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/4"]
+custom_minimum_size = Vector2(1000, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -200.0
+offset_right = 500.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.45098, 0.337255, 0.137255, 1)
+theme_override_constants/outline_size = 15
+text = "However, to actually fire a ricochet bullet, you'll need a token like this.
+
+So make sure to make that ricochet count. Don't blow it on just one target, or miss entirely.
+
+I'll give you one to start with on the house.
+You'll still fire normal bullets with right-click if you don't have a token."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/4"]
+position = Vector2(204, 334)
+texture = ExtResource("2_8lsiq")
+
+[node name="3" type="ColorRect" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.529412, 0.447059, 0.286275, 1)
+
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/3"]
+custom_minimum_size = Vector2(1000, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -200.0
+offset_right = 500.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.45098, 0.337255, 0.137255, 1)
+theme_override_constants/outline_size = 15
+text = "Now if you're a reeeaal gamer, you can try hitting multiple targets with a ricochet.
+
+Press right-click to fire a ricochet."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="2" type="ColorRect" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.529412, 0.447059, 0.286275, 1)
+
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/2"]
+custom_minimum_size = Vector2(1000, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -200.0
+offset_right = 500.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.45098, 0.337255, 0.137255, 1)
+theme_override_constants/outline_size = 15
+text = "You did bring your own gun right?
+Good, don't want your feathers dirtying up mine.
+
+Press left-click to shoot.
+I'm sure even you couldn't mess this up. jkterjter"
+autowrap_mode = 2
+
+[node name="1" type="ColorRect" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.529412, 0.447059, 0.286275, 1)
+
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/1"]
+custom_minimum_size = Vector2(1000, 400)
+layout_mode = 2
+offset_left = 353.0
+offset_top = 229.0
+offset_right = 1353.0
+offset_bottom = 629.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.45098, 0.337255, 0.137255, 1)
+theme_override_constants/outline_size = 15
+text = "Woah there Dragoon, you took a nasty fall there. I don't know how you ended up here but welcome to the tomato farm! 
+
+Since you're here, I want you to brush up your sharpshooting. And you better not skip through, cuz I'm only gonna say everything once."
+autowrap_mode = 2
+
+[node name="Seriously" type="ColorRect" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.529412, 0.447059, 0.286275, 1)
+
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/Seriously"]
+custom_minimum_size = Vector2(1000, 400)
+layout_mode = 2
+offset_left = 353.0
+offset_top = 229.0
+offset_right = 1353.0
+offset_bottom = 629.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.45098, 0.337255, 0.137255, 1)
+theme_override_constants/outline_size = 15
+text = ". . ."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="NavigationButtons" type="HBoxContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 2
+
+[node name="RestartTutorial" type="Button" parent="Control/PanelContainer/MarginContainer/VBoxContainer/NavigationButtons"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Uhh, I wasn't listening..."
+
+[node name="FinishTutorial" type="Button" parent="Control/PanelContainer/MarginContainer/VBoxContainer/NavigationButtons"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Let's Go"
+
+[node name="Next" type="Button" parent="Control/PanelContainer/MarginContainer/VBoxContainer/NavigationButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Next"
+
+[node name="DokiView" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 660.0
+offset_top = 56.0
+offset_right = 660.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="DokiView"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -302.0
+offset_top = -384.0
+offset_right = 525.0
+offset_bottom = 468.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.855367, 0.855367)
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="DokiView/SubViewportContainer"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(827, 852)
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="DokiView/SubViewportContainer/SubViewport"]
+
+[node name="Camera3D" type="Camera3D" parent="DokiView/SubViewportContainer/SubViewport/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.493, 6.222)
+fov = 30.0
+
+[node name="ChibiDoki" parent="DokiView/SubViewportContainer/SubViewport/Node3D" instance=ExtResource("8_vdm5y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.035, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="DokiView/SubViewportContainer/SubViewport/Node3D"]
+environment = SubResource("Environment_vdm5y")
+
+[connection signal="pressed" from="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect/LeftCharacter" to="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect" method="_on_left_character_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect/RightCharacter" to="Control/PanelContainer/MarginContainer/VBoxContainer/Content/ClipPanel/Slides/CharacterSelect" method="_on_right_character_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/MarginContainer/VBoxContainer/NavigationButtons/RestartTutorial" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/MarginContainer/VBoxContainer/NavigationButtons/FinishTutorial" to="." method="_on_finish_tutorial_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/MarginContainer/VBoxContainer/NavigationButtons/Next" to="." method="_on_next_pressed"]
