@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dlyf1apy4inlt"]
+[gd_scene load_steps=4 format=3 uid="uid://dlyf1apy4inlt"]
 
 [ext_resource type="Theme" uid="uid://btjt5q6wn3i0f" path="res://themes/menu_ui.tres" id="1_k3wv6"]
 [ext_resource type="Script" uid="uid://n8htng0tgxtq" path="res://scenes/UI/game_over_screen.gd" id="1_yjf6n"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_k3wv6"]
+color = Color(1, 0.673333, 0.44, 0.756863)
+thickness = 6
 
 [node name="GameOverScreen" type="Control"]
 layout_mode = 3
@@ -12,6 +16,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_k3wv6")
 script = ExtResource("1_yjf6n")
+metadata/_edit_lock_ = true
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -20,33 +25,142 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+custom_minimum_size = Vector2(0, 210)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -273.0
+offset_right = 273.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-custom_minimum_size = Vector2(0, 210)
-layout_mode = 2
 theme_override_constants/separation = 10
+alignment = 1
 
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="Stats" type="PanelContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/Stats"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Stats/MarginContainer"]
+layout_mode = 2
+
+[node name="Message" type="Label" parent="Panel/VBoxContainer/Stats/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 theme_type_variation = &"LabelA"
+theme_override_colors/font_color = Color(1, 0.964706, 0.890196, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.270588)
 text = "You Missed That One..."
 horizontal_alignment = 1
 
-[node name="Buttons" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+[node name="Highscore" type="Label" parent="Panel/VBoxContainer/Stats/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.973825, 0.000632246, 0.948525, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.627451)
+text = "⌁ H i g h s c o r e ⌁"
+horizontal_alignment = 1
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Panel/VBoxContainer/Stats/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Stats/MarginContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Score:"
+
+[node name="Score" type="Label" parent="Panel/VBoxContainer/Stats/MarginContainer/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/VBoxContainer/Stats/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Stats/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Highest Combo:"
+
+[node name="Highest Combo" type="Label" parent="Panel/VBoxContainer/Stats/MarginContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0"
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer/Stats/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_k3wv6")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Stats/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Stats/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Best Score:"
+
+[node name="BestScore" type="Label" parent="Panel/VBoxContainer/Stats/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer/Stats/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Stats/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Best Combo:"
+
+[node name="BestCombo" type="Label" parent="Panel/VBoxContainer/Stats/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0"
+
+[node name="Buttons" type="VBoxContainer" parent="Panel/VBoxContainer/Stats/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 theme_override_constants/separation = 15
 
-[node name="TryAnother" type="Button" parent="CenterContainer/VBoxContainer/Buttons"]
+[node name="TryAnother" type="Button" parent="Panel/VBoxContainer/Stats/MarginContainer/VBoxContainer/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Try Another!"
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/Buttons/TryAnother" to="." method="_on_try_another_pressed"]
+[node name="Tip" type="Label" parent="Panel/VBoxContainer/Stats/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.14, 0.118533, 0.0756, 0.215686)
+theme_override_constants/line_spacing = -7
+theme_override_font_sizes/font_size = 17
+text = "Tip: Right-click to ricochet your bullet. 
+Crowki can drop ricochet tokens."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[connection signal="pressed" from="Panel/VBoxContainer/Stats/MarginContainer/VBoxContainer/Buttons/TryAnother" to="." method="_on_try_another_pressed"]

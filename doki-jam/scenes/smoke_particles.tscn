@@ -4,7 +4,7 @@
 
 [sub_resource type="Curve" id="Curve_pv1l8"]
 _limits = [-1.0, 1.0, 0.0, 1.0]
-_data = [Vector2(0, 0.0832157), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.0832157), 0.0, 0.119433, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_e88m4"]
@@ -19,8 +19,8 @@ point_count = 2
 curve = SubResource("Curve_enf6l")
 
 [sub_resource type="Curve" id="Curve_e88m4"]
-_data = [Vector2(0.00344828, 0.734133), 0.0, 0.581585, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0.573034), 0.0, 0.0524344, 0, 0, Vector2(0.161905, 0.707865), 0.589888, 0.589888, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_g7gi1"]
 curve = SubResource("Curve_e88m4")
@@ -34,13 +34,13 @@ radial_velocity_min = 0.00997765
 radial_velocity_max = 0.199978
 radial_velocity_curve = SubResource("CurveTexture_pv1l8")
 gravity = Vector3(0, 0, 0)
-scale_min = 0.5
-scale_max = 0.5
+scale_min = 0.4
+scale_max = 0.4
 scale_curve = SubResource("CurveTexture_g7gi1")
 alpha_curve = SubResource("CurveTexture_e88m4")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cafjw"]
-render_priority = 0
+render_priority = 5
 shader = ExtResource("1_e4mxh")
 shader_parameter/Cloud_Speed = Vector2(0.3, -0.3)
 shader_parameter/Cloud_Intensity = 0.355
@@ -52,10 +52,10 @@ height = 2.0
 
 [node name="SmokeParticles" type="GPUParticles3D"]
 emitting = false
-amount = 5
+amount = 2
 lifetime = 0.75
 one_shot = true
-explosiveness = 0.8
+explosiveness = 1.0
 randomness = 0.15
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_wuck5")

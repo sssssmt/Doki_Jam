@@ -25,6 +25,14 @@ func set_bus_volume(name: String, value: float):
 	AudioServer.set_bus_volume_linear(idx, value)
 
 
+func toggle_fullscreen():
+	if not DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		#DisplayServer.window_set_size(Vector2i(1280,720))
+
+
 func _on_master_slider_value_changed(value: float) -> void:
 	set_bus_volume("Master", value)
 
@@ -39,3 +47,7 @@ func _on_voice_slider_value_changed(value: float) -> void:
 
 func _on_back_pressed() -> void:
 	hide()
+
+
+func _on_toggle_fullscreen_pressed() -> void:
+	toggle_fullscreen()

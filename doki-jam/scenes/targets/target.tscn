@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://2gitow74n5tp" path="res://scenes/bullet_trail.tscn" id="3_nlbrr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ay0qt"]
+size = Vector3(0.5, 0.5, 0.5)
 
 [node name="Target" type="RigidBody3D"]
-gravity_scale = 2.0
 can_sleep = false
 linear_velocity = Vector3(0, 1, 0)
 script = ExtResource("1_b5a2r")

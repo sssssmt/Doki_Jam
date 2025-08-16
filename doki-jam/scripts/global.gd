@@ -6,13 +6,22 @@ var music: Music
 var audio_sfx: SFX
 var ui: UI
 var shooting_gallery: ShootingGallery
+var timer: GameTimer
 
-var show_tutorial: bool = true
+var show_tutorial: bool = false
 
 # Score Variables
 var score: int : set = _set_score
 var multiplier: float = 1.0 : set = _set_multiplier
 var combo: int : set = _set_combo
+
+var quickshot_window: float = 0.0: 
+	set(value):
+		quickshot_window = max(value, 0.0)
+
+var highest_combo: int = 0
+var best_high_score: int = 0
+var best_combo: int = 0
 
 var bullets: int = 6 : set = _set_bullets
 var previous_bullet_count: int 				# Used to check for misses
@@ -21,8 +30,9 @@ var ricochet_token: int = 1 : set = _set_ricochet_token
 
 #region Variable Setter Functions
 func _set_score(value: int):
-	var change = value - score
-	score = score + (change * multiplier)
+	score = value
+	best_high_score = max(score, best_high_score)
+	
 	if hud:
 		hud.score_label.text = str(score)
 
@@ -40,6 +50,9 @@ func _set_combo(value: int):
 	combo = value
 	var x = combo / 5
 	multiplier = float(x) + 1.0
+	highest_combo = max(combo, highest_combo)
+	best_combo = max(combo, best_combo)
+	
 	if hud:
 		hud.combo_label.text = str(combo)
 
@@ -92,6 +105,11 @@ func _notification(what: int) -> void:
 			get_tree().quit()
 
 
+func _process(delta: float) -> void:
+	if not is_zero_approx(quickshot_window):
+		quickshot_window -= delta
+
+
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("debug_increase"):	# Debug
 		combo += 1
@@ -116,7 +134,7 @@ func save_configs():
 	# Create new ConfigFile object
 	var config = ConfigFile.new()
 	
-	# Store Volume settings
+	## Store Volume settings
 	# Get values for each idx of existing Audio Buses
 	for idx in range(AudioServer.get_bus_count()):
 		var name = AudioServer.get_bus_name(idx)
@@ -126,6 +144,12 @@ func save_configs():
 		# Write values
 		config.set_value(name, "bus_idx", idx)
 		config.set_value(name, "volume_db", AudioServer.get_bus_volume_db(idx))
+	
+	## Store Personal Stats
+	config.set_value("Stats", "has_done_tutorial", !show_tutorial)
+	config.set_value("Stats", "best_high_score", best_high_score)
+	config.set_value("Stats", "best_combo", best_combo)
+	
 	
 	# Save to file (overwrite if exists)
 	config.save("res://Config/configs.cfg")
@@ -152,6 +176,12 @@ func load_configs():
 		# Set volume for that bus
 		if idx < AudioServer.bus_count:
 			AudioServer.set_bus_volume_db(idx, volume_db)
+	
+	## Set Personal Stats
+	if config.has_section("Stats"):
+		show_tutorial = !config.get_value("Stats", "has_done_tutorial")
+		best_high_score = config.get_value("Stats", "best_high_score")
+		best_combo = config.get_value("Stats", "best_combo")
 
 
 func register_hit():
@@ -166,6 +196,10 @@ func register_miss():
 	audio_sfx.miss.play()
 
 
+func start_quickshot_timer():
+	quickshot_window = 0.4
+
+
 func game_over():
 	ui.game_over_screen.display_game_over()
 	get_tree().paused = true
@@ -174,6 +208,7 @@ func game_over():
 func try_another():
 	bullets = 6
 	ricochet_token = 1
+	highest_combo = 0
 	combo = 0
 	multiplier = 0
 	score = 0

@@ -14,3 +14,14 @@ text = "300"
 font_size = 30
 outline_size = 5
 script = ExtResource("1_u3ofo")
+
+[node name="Quickshot" type="Label3D" parent="."]
+visible = false
+pixel_size = 0.0007
+offset = Vector2(0, -30)
+billboard = 1
+fixed_size = true
+modulate = Color(0.999995, 0.211625, 0.537317, 1)
+outline_modulate = Color(0.4797, 0.1794, 0.78, 1)
+text = "Quickshot x2"
+font_size = 20

@@ -57,12 +57,12 @@ script = ExtResource("2_trceg")
 unique_name_in_owner = true
 visible = false
 
+[node name="MainMenu" parent="UI" instance=ExtResource("7_muem4")]
+unique_name_in_owner = true
+
 [node name="PauseMenu" parent="UI" instance=ExtResource("5_jkv2x")]
 unique_name_in_owner = true
 visible = false
-
-[node name="MainMenu" parent="UI" instance=ExtResource("7_muem4")]
-unique_name_in_owner = true
 
 [node name="Settings" parent="UI" instance=ExtResource("6_jbj1t")]
 unique_name_in_owner = true
@@ -106,9 +106,9 @@ volume_db = -5.0
 
 [connection signal="play_button_pressed" from="UI" to="." method="_on_ui_play_button_pressed"]
 [connection signal="try_another_pressed" from="UI/GameOverScreen" to="." method="_on_game_over_screen_try_another_pressed"]
-[connection signal="quit_pressed" from="UI/PauseMenu" to="UI" method="_on_pause_menu_quit_pressed"]
-[connection signal="resume_pressed" from="UI/PauseMenu" to="UI" method="_on_pause_menu_resume_pressed"]
-[connection signal="settings_pressed" from="UI/PauseMenu" to="UI" method="_on_pause_menu_settings_pressed"]
 [connection signal="play_pressed" from="UI/MainMenu" to="UI" method="_on_main_menu_play_pressed"]
 [connection signal="quit_pressed" from="UI/MainMenu" to="UI" method="_on_main_menu_quit_pressed"]
 [connection signal="settings_pressed" from="UI/MainMenu" to="UI" method="_on_main_menu_settings_pressed"]
+[connection signal="quit_pressed" from="UI/PauseMenu" to="UI" method="_on_pause_menu_quit_pressed"]
+[connection signal="resume_pressed" from="UI/PauseMenu" to="UI" method="_on_pause_menu_resume_pressed"]
+[connection signal="settings_pressed" from="UI/PauseMenu" to="UI" method="_on_pause_menu_settings_pressed"]

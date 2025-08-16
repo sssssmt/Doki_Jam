@@ -19,7 +19,10 @@ func _ready() -> void:
 		add_to_group("can_ricochet")
 
 
-func destroy(was_shot:= true):
+func destroy(was_shot:= true, can_quickshot:= true):
+	if was_shot:
+		Global.timer.time_left += 1
+	
 	remove_from_group("can_ricochet")
 	collision_shape.disabled = true
 	freeze = true
@@ -32,17 +35,28 @@ func destroy(was_shot:= true):
 	smoke_particles.emitting = true
 	
 	# Score
+	var quickshot_mult = 1.0
 	if was_shot:
 		Global.audio_sfx.destroy.play()
 		
-		Global.score += points
-		Global.combo += 1
 		var ping = preload("res://scenes/score_ping.tscn").instantiate()
 		add_child(ping)
-		ping.text = str(int(points * Global.multiplier))
 		if Global.multiplier > 1.0:
 			ping.modulate = Color.CORAL
 			ping.outline_modulate = Color.FIREBRICK
+		
+		# Quickshot
+		if can_quickshot:
+			if not is_zero_approx(Global.quickshot_window):
+				ping.quickshot.show()
+				quickshot_mult = 2.0
+			
+			Global.start_quickshot_timer()
+		
+		var points_scored = int(points * Global.multiplier * quickshot_mult)
+		Global.score += points_scored
+		ping.text = str(points_scored)
+		Global.combo += 1
 	
 	await smoke_particles.finished
 	queue_free()
@@ -61,7 +75,7 @@ func ricochet(bounces_left: int = -1):
 		bullet_trail.draw_trail(ricochet_target.global_position)
 		
 		
-		ricochet_target.destroy()
+		ricochet_target.destroy(true, false)
 		ricochet_target.ricochet()
 	else:
 		# Hides the trail of the last Target
@@ -99,4 +113,4 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 
 func _on_lifetime_timeout() -> void:
 	if despawns == true:
-		destroy(false)
+		destroy(false, false)

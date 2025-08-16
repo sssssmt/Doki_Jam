@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://br1xb8sexb4ep"]
+[gd_scene load_steps=8 format=3 uid="uid://br1xb8sexb4ep"]
 
 [ext_resource type="Theme" uid="uid://btjt5q6wn3i0f" path="res://themes/menu_ui.tres" id="1_t8pki"]
 [ext_resource type="Script" uid="uid://gnu4vk2s002i" path="res://scenes/UI/settings.gd" id="2_32w1k"]
@@ -16,6 +16,20 @@ corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_emn88"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jyo1n"]
+bg_color = Color(1, 0.847059, 0.541176, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 0.67451, 0.435294, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -63,9 +77,10 @@ theme_override_constants/separation = 10
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 clip_children = 1
-custom_minimum_size = Vector2(0, 273)
+custom_minimum_size = Vector2(0, 270)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_i4dvr")
+scroll_vertical = 64
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
@@ -184,9 +199,38 @@ scrollable = false
 tick_count = 5
 ticks_on_borders = true
 
-[node name="Panel" type="Panel" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/SettingsList"]
-custom_minimum_size = Vector2(0, 400)
+[node name="ToggleFullscreen" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/SettingsList"]
 layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_emn88")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jyo1n")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jyo1n")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jyo1n")
+text = "Toggle Fullscreen"
+
+[node name="MouseCursor" type="PanelContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/SettingsList"]
+visible = false
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("3_emn88")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/SettingsList/MouseCursor"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/SettingsList/MouseCursor/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Mouse Cursor"
+
+[node name="OptionButton" type="OptionButton" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/SettingsList/MouseCursor/HBoxContainer"]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "Crosshair"
+popup/item_0/id = 0
+popup/item_1/text = "Bounty Hunter"
+popup/item_1/id = 1
+popup/item_2/text = "Dokiwatch Rivals"
+popup/item_2/id = 2
 
 [node name="Back" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -217,4 +261,5 @@ horizontal_alignment = 1
 [connection signal="value_changed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/SettingsList/AudioContainer/MarginContainer/VBoxContainer/Music/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/SettingsList/AudioContainer/MarginContainer/VBoxContainer/SFX/SfxSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="value_changed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/SettingsList/AudioContainer/MarginContainer/VBoxContainer/Voice/VoiceSlider" to="." method="_on_voice_slider_value_changed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/SettingsList/ToggleFullscreen" to="." method="_on_toggle_fullscreen_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]

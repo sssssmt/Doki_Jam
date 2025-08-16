@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://0l12uov6bv0e"]
+[gd_scene load_steps=29 format=3 uid="uid://0l12uov6bv0e"]
 
 [ext_resource type="Script" uid="uid://tvpq5l66pbmc" path="res://scenes/shooting_gallery.gd" id="1_g7gi1"]
 [ext_resource type="Script" uid="uid://dpy3ca30ukscp" path="res://scripts/target_launcher.gd" id="2_enf6l"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://cql38bkq0luuh" path="res://assets/TomatoHill.png" id="11_0fny8"]
 [ext_resource type="Texture2D" uid="uid://dy3m7rmx7y5uq" path="res://assets/cloud_4.png" id="11_yu0e5"]
 [ext_resource type="PackedScene" uid="uid://d0s1xawasxvb0" path="res://scenes/actors/crowki.tscn" id="17_yu0e5"]
+[ext_resource type="Script" uid="uid://ckxer6wtdh6v3" path="res://scenes/UI/game_timer.tres.gd" id="19_yu0e5"]
 [ext_resource type="Texture2D" uid="uid://ngp32lt2xfio" path="res://assets/UI/token.png" id="20_wc8dk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0p72i"]
@@ -174,12 +175,14 @@ material = SubResource("StandardMaterial3D_0p72i")
 
 [node name="Diamond" parent="Map/Shelf" instance=ExtResource("3_pv1l8")]
 transform = Transform3D(0.805723, 0.521422, -0.280945, -0.128421, 0.616844, 0.776538, 0.578203, -0.589595, 0.563967, -0.0430691, 0.145552, -0.00128102)
+gravity_scale = 2.0
 freeze = true
 despawns = false
 can_ricochet = false
 
 [node name="Tomato" parent="Map/Shelf" instance=ExtResource("4_e88m4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.401832, 0.167244, 0.00158834)
+gravity_scale = 2.0
 freeze = true
 despawns = false
 can_ricochet = false
@@ -315,6 +318,7 @@ speed = 0.35
 
 [node name="Crowki" parent="Actors/SpinMarker" instance=ExtResource("17_yu0e5")]
 transform = Transform3D(-2.58777e-08, -3.52282e-08, -1, -0.805928, 0.592013, 0, 0.592013, 0.805928, -4.37114e-08, 0.364, 4.8, -10.926)
+gravity_scale = 2.0
 freeze = true
 
 [node name="Targets" type="Node3D" parent="."]
@@ -323,16 +327,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="TargetLauncher" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.961568, 1.16228, 1.76542)
 script = ExtResource("2_enf6l")
+target_gravity_scale = 1.75
 standard_force = 6.0
 horizontal_deviation = 0.45
+vertical_deviation = 0.0
+rapid_fire_delay = 0.25
+rapid_fire_max = 4
 metadata/_edit_group_ = true
 
 [node name="RayCast3D" type="RayCast3D" parent="TargetLauncher"]
 enabled = false
-target_position = Vector3(-0.14, 0.83, -1)
+target_position = Vector3(-0.14, 0.695, -1)
 metadata/_edit_lock_ = true
 
 [node name="Timer" type="Timer" parent="TargetLauncher"]
+wait_time = 1.5
 autostart = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
@@ -442,6 +451,25 @@ position = Vector2(1650, 968)
 scale = Vector2(0.615234, 0.615234)
 texture = ExtResource("20_wc8dk")
 
+[node name="Timer" type="Label" parent="HUD"]
+modulate = Color(1, 1, 1, 0.317647)
+anchors_preset = -1
+anchor_left = 0.954167
+anchor_right = 0.983854
+anchor_bottom = 0.0638889
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.96, 0.98, 1, 0.87451)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 0.180392)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 50
+text = "00"
+horizontal_alignment = 2
+script = ExtResource("19_yu0e5")
+metadata/_edit_use_anchors_ = true
+
+[node name="1Second" type="Timer" parent="HUD/Timer"]
+autostart = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pv5gp")
 
@@ -454,3 +482,4 @@ directional_shadow_mode = 1
 
 [connection signal="body_entered" from="Map/FloorArea" to="Map/FloorArea" method="_on_body_entered"]
 [connection signal="timeout" from="TargetLauncher/Timer" to="TargetLauncher" method="_on_timer_timeout"]
+[connection signal="timeout" from="HUD/Timer/1Second" to="HUD/Timer" method="_on_second_timeout"]

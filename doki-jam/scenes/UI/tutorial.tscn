@@ -424,8 +424,7 @@ size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.45098, 0.337255, 0.137255, 1)
 theme_override_constants/outline_size = 15
-text = "OH MY GOD, Dragoon, it's everyone's favorite Dokiverse character, Crowki. She carries tokens, so shoot her to get your token back.
-If you already have one, she'll drop an extra bullet instead.
+text = "OH MY GOD, Dragoon, it's everyone's favorite Dokiverse character, Crowki. She carries tokens, so shoot her to get your token back, and an extra bullet.
 
 Oh, does Crowki feel pain? Haha, that's for me to know and Crowki to find out."
 vertical_alignment = 1

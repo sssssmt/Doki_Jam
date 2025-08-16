@@ -33,8 +33,8 @@ func hide_menus():
 		child.hide()
 
 
-func game_over():
-	game_over_screen.display_game_over()
+func game_over(time_out:= false):
+	game_over_screen.display_game_over(time_out)
 
 
 func back_to_main_menu():

@@ -10,10 +10,9 @@ var can_be_shot: bool = true
 func on_hit():
 	super()
 	if can_be_shot:
+		Global.ricochet_token += 1
 		if Global.ricochet_token:
 			Global.bullets += 1
-		else:
-			Global.ricochet_token += 1
 		
 		voice_player.play()
 		
