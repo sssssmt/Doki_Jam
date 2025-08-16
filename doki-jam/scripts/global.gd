@@ -8,7 +8,7 @@ var ui: UI
 var shooting_gallery: ShootingGallery
 var timer: GameTimer
 
-var show_tutorial: bool = false
+var show_tutorial: bool = true
 
 # Score Variables
 var score: int : set = _set_score
@@ -152,7 +152,7 @@ func save_configs():
 	
 	
 	# Save to file (overwrite if exists)
-	config.save("res://Config/configs.cfg")
+	config.save("user://configs.cfg")
 
 
 # Load and set the values for each element
@@ -160,7 +160,7 @@ func load_configs():
 	var config = ConfigFile.new()
 	
 	# Load and check for error
-	var err = config.load("res://Config/configs.cfg")
+	var err = config.load("user://configs.cfg")
 	if err != OK:
 		return
 	
